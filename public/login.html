@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registro - Bacheo CETis 23</title>
+  <title>Iniciar Sesión - Bacheo CETis 23</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,50 +14,35 @@
       </div>
       <ul class="nav-links">
         <li><a href="/">Inicio</a></li>
-        <li><a href="login.html">Ingresar</a></li>
-        <li><a href="register.html" class="active">Registrarse</a></li>
+        <li><a href="login.html" class="active">Ingresar</a></li>
+        <li><a href="register.html" class="btn-nav-action">Registrarse</a></li>
       </ul>
     </div>
   </header>
 
   <main class="auth-wrapper">
     <div class="glass-panel auth-card">
-      <h2>Registro de Cuenta</h2>
-      <p class="auth-subtitle">Crea tu cuenta de estudiante, vecino o transportista de Lerma</p>
+      <h2>Iniciar Sesión</h2>
+      <p class="auth-subtitle">Ingresa para reportar y apoyar en el bacheo del municipio</p>
 
-      <form id="registerForm">
-        <div class="form-group">
-          <label for="name" class="form-label">Nombre Completo</label>
-          <input type="text" id="name" class="form-input" placeholder="Ingresa tu nombre completo" required>
-        </div>
-        
+      <form id="loginForm">
         <div class="form-group">
           <label for="email" class="form-label">Correo Electrónico</label>
           <input type="email" id="email" class="form-input" placeholder="ejemplo@correo.com" required>
         </div>
 
         <div class="form-group">
-          <label for="role" class="form-label">Tu Rol en la Comunidad</label>
-          <select id="role" class="form-input" required style="background-color: #0b0f19;">
-            <option value="" disabled selected>Selecciona una opción</option>
-            <option value="estudiante">Estudiante de CETis 23</option>
-            <option value="vecino">Vecino de Lerma</option>
-            <option value="transportista">Transportista / Chofer de Carga</option>
-          </select>
-        </div>
-
-        <div class="form-group">
           <label for="password" class="form-label">Contraseña</label>
-          <input type="password" id="password" class="form-input" placeholder="Mínimo 6 caracteres" required>
+          <input type="password" id="password" class="form-input" placeholder="Ingresa tu contraseña" required>
         </div>
 
         <div id="errorMsg" style="color: var(--accent-red); margin-bottom: 1.5rem; display: none; font-size: 0.9rem; text-align: center;"></div>
 
-        <button type="submit" class="btn btn-primary" style="width: 100%;">Crear Cuenta</button>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Ingresar al Panel</button>
       </form>
 
       <div class="auth-footer">
-        ¿Ya tienes cuenta? <a href="login.html">Inicia Sesión aquí</a>
+        ¿No tienes cuenta? <a href="register.html">Regístrate aquí</a>
       </div>
     </div>
   </main>
@@ -72,24 +57,22 @@
       window.location.href = 'dashboard.html';
     }
 
-    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       
-      const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
-      const role = document.getElementById('role').value;
       const password = document.getElementById('password').value;
       const errorMsg = document.getElementById('errorMsg');
 
       errorMsg.style.display = 'none';
 
       try {
-        const response = await fetch('/api/auth/register', {
+        const response = await fetch('/api/auth/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ name, email, role, password })
+          body: JSON.stringify({ email, password })
         });
 
         const data = await response.json();
@@ -98,7 +81,7 @@
           localStorage.setItem('token', data.token);
           window.location.href = 'dashboard.html';
         } else {
-          errorMsg.textContent = data.message || 'Error en el registro';
+          errorMsg.textContent = data.message || 'Error al iniciar sesión';
           errorMsg.style.display = 'block';
         }
       } catch (err) {

@@ -3,282 +3,295 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel de Reportes - Bacheo CBTis 23</title>
+  <title>Panel de Control - Bacheo CETis 23</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
   <header>
     <div class="nav-container">
       <div class="logo">
-        <span>🚧</span> BacheoAlert 
-        <span class="logo-cbtis">CBTis 23</span>
+        ⚠️ Lerma<span>Bacheo-CETis23</span>
       </div>
-      <div class="user-badge" id="userInfo">
-        <!-- Renderizado dinámicamente -->
-      </div>
+      <ul class="nav-links">
+        <li><a href="#" class="active" id="btnHome">Dashboard</a></li>
+        <li><button class="btn btn-secondary" id="logoutBtn" style="padding: 0.4rem 1rem; font-size: 0.9rem;">Cerrar Sesión</button></li>
+      </ul>
     </div>
   </header>
 
-  <main class="main-container">
-    <!-- Estadísticas Rápidas -->
-    <div class="stats-container">
-      <div class="stat-card">
-        <div class="stat-num" id="statReportados">0</div>
-        <div class="stat-label">Reportados</div>
+  <main class="dashboard-container">
+    <div class="dashboard-header">
+      <div class="user-welcome">
+        <h2>Hola, <span id="userName" style="color: var(--accent-orange);">Cargando...</span></h2>
+        <p>Rol: <strong id="userRole" style="text-transform: capitalize;">...</strong> | Portal de Bacheo Lerma</p>
       </div>
+    </div>
+
+    <!-- Métricas del Municipio -->
+    <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-num" id="statProceso" style="color: var(--accent-amber);">0</div>
-        <div class="stat-label">En proceso</div>
+        <div class="stat-label">Baches Totales Reportados</div>
+        <div class="stat-value" id="statTotal">0</div>
+        <div class="stat-desc">Acumulado en la periferia del CETis 23</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-num" id="statReparados" style="color: var(--accent-green);">0</div>
-        <div class="stat-label">Reparados</div>
+      <div class="stat-card yellow">
+        <div class="stat-label">En Reparación</div>
+        <div class="stat-value" id="statRepair">0</div>
+        <div class="stat-desc">Cuadrillas activas de obras públicas</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-label">Baches Solucionados</div>
+        <div class="stat-value" id="statSolved">0</div>
+        <div class="stat-desc">Restaurados por el ayuntamiento o vecinos</div>
+      </div>
+      <div class="stat-card cyan">
+        <div class="stat-label">Presupuesto Estimado</div>
+        <div class="stat-value" id="statBudget">$0k</div>
+        <div class="stat-desc">Cálculo de asfalto y mano de obra local</div>
       </div>
     </div>
 
     <div class="dashboard-grid">
-      <!-- Columna Izquierda: Formulario de Reporte -->
-      <section class="card">
-        <h2>Reportar Nuevo Bache</h2>
-        <form id="reportForm">
-          <div class="form-group">
-            <label for="titulo">¿Qué bache es? (Título breve)</label>
-            <input type="text" id="titulo" placeholder="Ej. Bache profundo frente a la parada" required>
-          </div>
-
-          <div class="form-group">
-            <label for="ubicacion">Ubicación exacta (Zona CBTis 23)</label>
-            <select id="ubicacion" required>
-              <option value="">Selecciona la ubicación...</option>
-              <option value="Entrada Principal (Av. de las Partidas)">Entrada Principal (Av. de las Partidas)</option>
-              <option value="Esquina del Estacionamiento Escolar">Esquina del Estacionamiento Escolar</option>
-              <option value="Parada de Autobuses del CBTis">Parada de Autobuses del CBTis</option>
-              <option value="Cruse peatonal frente al plantel">Cruce peatonal frente al plantel</option>
-              <option value="Calle trasera de acceso estudiantil">Calle trasera de acceso estudiantil</option>
-              <option value="Otra calle colindante de la zona escolar">Otra calle colindante de la zona escolar</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="gravedad">Nivel de Daño / Gravedad</label>
-            <select id="gravedad" required>
-              <option value="Baja">Bajo (Grietas o baches pequeños)</option>
-              <option value="Media" selected>Medio (Dificulta el paso y daña llantas)</option>
-              <option value="Alta">Alto (Peligro inminente de accidente vehicular/peatonal)</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="descripcion">Descripción detallada</label>
-            <textarea id="descripcion" placeholder="Describe el tamaño, profundidad o afectación a la comunidad estudiantil..." required></textarea>
-          </div>
-
-          <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Reporte</button>
-        </form>
-      </section>
-
-      <!-- Columna Derecha: Baches Activos y Votaciones -->
-      <section>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-          <h2 style="margin-bottom: 0;">Baches Reportados en la Zona</h2>
-          <button class="btn btn-secondary" onclick="loadBaches()" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
-            🔄 Actualizar
-          </button>
+      <!-- Sección de Reportes existentes -->
+      <div class="reports-section">
+        <h3>🚨 Reportes Comunitarios</h3>
+        <div class="reports-list" id="reportsList">
+          <p style="color: var(--text-secondary);">Cargando listado de reportes...</p>
         </div>
-        
-        <div class="baches-list" id="bachesList">
-          <!-- Baches cargados dinámicamente -->
+      </div>
+
+      <!-- Formulario para agregar reporte -->
+      <div>
+        <div class="glass-panel" style="padding: 2rem; position: sticky; top: 90px;">
+          <h3 style="margin-bottom: 1.5rem; color: var(--accent-orange);">Registrar Nuevo Bache</h3>
+          
+          <form id="newReportForm">
+            <div class="form-group">
+              <label for="ubicacion" class="form-label">Ubicación Exacta (Lerma, Edomex)</label>
+              <input type="text" id="ubicacion" class="form-input" placeholder="Ej. Calle de la escuela, frente al portón de entrada CETis 23" required>
+            </div>
+
+            <div class="form-group">
+              <label for="severidad" class="form-label">Severidad del Daño</label>
+              <select id="severidad" class="form-input" required style="background-color: #0b0f19;">
+                <option value="baja">Baja (Grietas superficiales)</option>
+                <option value="media" selected>Media (Hoyo mediano, peligroso para motos)</option>
+                <option value="crítica">Crítica (Bache profundo, daña llantas / tráilers)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="descripcion" class="form-label">Descripción</label>
+              <textarea id="descripcion" class="form-input" rows="3" placeholder="Describe los detalles del bache y riesgos observados" required style="resize: none;"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="imagenUrl" class="form-label">URL de Imagen (Opcional)</label>
+              <input type="url" id="imagenUrl" class="form-input" placeholder="https://ejemplo.com/bache.jpg">
+            </div>
+
+            <div id="formError" style="color: var(--accent-red); margin-bottom: 1rem; display: none; font-size: 0.9rem;"></div>
+            <div id="formSuccess" style="color: var(--accent-green); margin-bottom: 1rem; display: none; font-size: 0.9rem;"></div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Publicar Reporte</button>
+          </form>
         </div>
-      </section>
+      </div>
     </div>
   </main>
 
   <footer>
-    <p>&copy; 2026 CBTis 23. Proyecto Escolar de Bacheo y Seguridad Vial, Lerma, Estado de México.</p>
+    <p>&copy; 2026 Portal de Bacheo Comunitario CETis 23. Lerma, Estado de México.</p>
   </footer>
 
   <script>
-    // Verificar sesión del estudiante
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (!user) {
-      window.location.href = 'register.html';
-    } else {
-      // Mostrar usuario en el header
-      const userInfo = document.getElementById('userInfo');
-      userInfo.innerHTML = `
-        <div class="avatar">${user.name.charAt(0).toUpperCase()}</div>
-        <div style="text-align: left; font-size: 0.9rem;">
-          <div style="font-weight: 600; line-height: 1.2;">${user.name}</div>
-          <div style="font-size: 0.75rem; color: var(--text-secondary);">${user.email}</div>
-        </div>
-        <button class="btn btn-secondary" onclick="logout()" style="padding: 4px 8px; font-size: 0.75rem; margin-left: 0.5rem;">Salir</button>
-      `;
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = 'login.html';
     }
 
-    function logout() {
-      localStorage.removeItem('user');
-      window.location.href = 'register.html';
-    }
+    // Cerrar sesión
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      localStorage.removeItem('token');
+      window.location.href = 'login.html';
+    });
 
-    // Cargar Baches de la API
-    async function loadBaches() {
-      const bachesList = document.getElementById('bachesList');
-      bachesList.innerHTML = '<p style="text-align: center; padding: 2rem;">Cargando reportes...</p>';
-
+    // Cargar perfil del usuario
+    async function loadProfile() {
       try {
-        const response = await fetch('/api/baches');
-        const data = await response.json();
-
-        if (response.ok && data.success) {
-          const baches = data.baches;
-          
-          if (baches.length === 0) {
-            bachesList.innerHTML = `
-              <div class="card" style="text-align: center; padding: 3rem;">
-                <span style="font-size: 3rem;">🎉</span>
-                <h3 style="margin-top: 1rem; font-weight: 600;">¡Excelente estado vial!</h3>
-                <p style="margin-bottom: 0;">No hay reportes activos de baches en el CBTis 23 en este momento.</p>
-              </div>
-            `;
-            updateStats([]);
-            return;
+        const response = await fetch('/api/auth/me', {
+          headers: {
+            'Authorization': `Bearer ${token}`
           }
-
-          bachesList.innerHTML = '';
-          baches.forEach(bache => {
-            const card = document.createElement('div');
-            card.className = 'bache-card';
-
-            const gravedadClass = `badge-${bache.gravedad.toLowerCase()}`;
-            const estadoClass = `badge-${bache.estado.replace(/\s+/g, '-').toLowerCase()}`;
-
-            const date = new Date(bache.createdAt).toLocaleDateString('es-MX', {
-              day: 'numeric',
-              month: 'short',
-              year: 'numeric'
-            });
-
-            card.innerHTML = `
-              <div class="bache-header">
-                <div>
-                  <h3 class="bache-title">${bache.titulo}</h3>
-                  <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">
-                    📍 ${bache.ubicacion}
-                  </div>
-                </div>
-                <div class="bache-badges">
-                  <span class="badge ${gravedadClass}">Daño ${bache.gravedad}</span>
-                  <span class="badge ${estadoClass}">${bache.estado}</span>
-                </div>
-              </div>
-              <div class="bache-body">
-                <p>${bache.descripcion}</p>
-              </div>
-              <div class="bache-footer">
-                <div class="bache-meta">
-                  <span>Reportado por: <strong>${bache.reportadoPor}</strong></span>
-                  <span>Fecha: ${date}</span>
-                </div>
-                <div class="vote-section">
-                  <button class="btn-vote" onclick="votarBache('${bache._id}')">
-                    👍 Apoyar Reporte
-                  </button>
-                  <span class="votes-count" id="votos-${bache._id}">${bache.votos}</span>
-                </div>
-              </div>
-            `;
-            bachesList.appendChild(card);
-          });
-
-          updateStats(baches);
+        });
+        const data = await response.json();
+        if (data.success) {
+          document.getElementById('userName').textContent = data.user.name;
+          document.getElementById('userRole').textContent = data.user.role;
+        } else {
+          localStorage.removeItem('token');
+          window.location.href = 'login.html';
         }
-      } catch (error) {
-        console.error('Error al cargar baches:', error);
-        bachesList.innerHTML = '<p style="text-align: center; color: #ff3b30; padding: 2rem;">Error al recuperar reportes.</p>';
+      } catch (err) {
+        console.error(err);
+        localStorage.removeItem('token');
+        window.location.href = 'login.html';
       }
     }
 
-    // Actualizar números de estadísticas
-    function updateStats(baches) {
-      let reportados = 0;
-      let enProceso = 0;
-      let reparados = 0;
+    // Cargar reportes y calcular métricas
+    async function loadReports() {
+      try {
+        const response = await fetch('/api/reportes');
+        const data = await response.json();
+        
+        if (data.success) {
+          const list = document.getElementById('reportsList');
+          list.innerHTML = '';
 
-      baches.forEach(bache => {
-        if (bache.estado === 'Reportado') reportados++;
-        else if (bache.estado === 'En proceso') enProceso++;
-        else if (bache.estado === 'Reparado') reparados++;
-      });
+          if (data.reportes.length === 0) {
+            list.innerHTML = `<p style="color: var(--text-secondary);">No hay baches reportados en la zona aún. ¡Sé el primero!</p>`;
+            return;
+          }
 
-      document.getElementById('statReportados').innerText = reportados;
-      document.getElementById('statProceso').innerText = enProceso;
-      document.getElementById('statReparados').innerText = reparados;
+          let total = data.reportes.length;
+          let repair = 0;
+          let solved = 0;
+          let criticalCount = 0;
+
+          data.reportes.forEach(rep => {
+            if (rep.estado === 'en reparación') repair++;
+            if (rep.estado === 'solucionado') solved++;
+            if (rep.severidad === 'crítica') criticalCount++;
+
+            const card = document.createElement('div');
+            card.className = 'report-card';
+            card.innerHTML = `
+              <div class="report-header">
+                <span class="report-location">${rep.ubicacion}</span>
+                <div>
+                  <span class="badge badge-${rep.severidad}">${rep.severidad}</span>
+                  <span class="badge badge-${rep.estado === 'en reparación' ? 'reparacion' : rep.estado}">${rep.estado}</span>
+                </div>
+              </div>
+              <p class="report-desc">${rep.descripcion}</p>
+              ${rep.imagenUrl ? `<img src="${rep.imagenUrl}" alt="Bache Lerma" style="width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-color);" onerror="this.style.display='none'">` : ''}
+              
+              <div class="report-meta">
+                <div class="reporter-info">
+                  Reportado por: <strong>${rep.reportadoPor ? rep.reportadoPor.name : 'Usuario'}</strong> 
+                  <span class="reporter-role">${rep.reportadoPor ? rep.reportadoPor.role : ''}</span>
+                </div>
+                <span>${new Date(rep.fecha).toLocaleDateString('es-MX')}</span>
+              </div>
+              
+              <div class="report-actions">
+                <button class="btn-vote" onclick="voteReport('${rep._id}')">👍 Apoyar Reporte (${rep.votos})</button>
+                <button class="btn-status-change" onclick="cycleStatus('${rep._id}', '${rep.estado}')">🔄 Cambiar Estado</button>
+              </div>
+            `;
+            list.appendChild(card);
+          });
+
+          // Actualizar métricas
+          document.getElementById('statTotal').textContent = total;
+          document.getElementById('statRepair').textContent = repair;
+          document.getElementById('statSolved').textContent = solved;
+          
+          // Presupuesto estimado simplificado ($5,000 MXN por bache normal, $15,000 por crítico)
+          const budget = (total - solved) * 5 + criticalCount * 10;
+          document.getElementById('statBudget').textContent = `$${budget}k`;
+        }
+      } catch (err) {
+        console.error('Error al cargar reportes:', err);
+      }
     }
 
-    // Crear un reporte
-    const reportForm = document.getElementById('reportForm');
-    reportForm.addEventListener('submit', async (e) => {
+    // Enviar nuevo reporte
+    document.getElementById('newReportForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-
-      const titulo = document.getElementById('titulo').value;
       const ubicacion = document.getElementById('ubicacion').value;
-      const gravedad = document.getElementById('gravedad').value;
+      const severidad = document.getElementById('severidad').value;
       const descripcion = document.getElementById('descripcion').value;
+      const imagenUrl = document.getElementById('imagenUrl').value;
+      const errorDiv = document.getElementById('formError');
+      const successDiv = document.getElementById('formSuccess');
+
+      errorDiv.style.display = 'none';
+      successDiv.style.display = 'none';
 
       try {
-        const response = await fetch('/api/baches', {
+        const response = await fetch('/api/reportes', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify({
-            titulo,
-            ubicacion,
-            gravedad,
-            descripcion,
-            reportadoPor: user.email
-          })
+          body: JSON.stringify({ ubicacion, severidad, descripcion, imagenUrl })
         });
 
         const data = await response.json();
-
-        if (response.ok && data.success) {
-          reportForm.reset();
-          loadBaches(); // Recargar lista
-          alert('¡Gracias por tu reporte estudiantil! Ya está publicado en el portal.');
+        if (data.success) {
+          successDiv.textContent = data.message;
+          successDiv.style.display = 'block';
+          document.getElementById('newReportForm').reset();
+          loadReports();
         } else {
-          alert('Error al enviar reporte: ' + data.message);
+          errorDiv.textContent = data.message;
+          errorDiv.style.display = 'block';
         }
-      } catch (error) {
-        console.error('Error:', error);
-        alert('Error al conectar con el servidor.');
+      } catch (err) {
+        errorDiv.textContent = 'Error al enviar el reporte.';
+        errorDiv.style.display = 'block';
       }
     });
 
     // Votar por un bache
-    async function votarBache(id) {
+    async function voteReport(id) {
       try {
-        const response = await fetch(`/api/baches/${id}/votar`, {
-          method: 'POST'
+        const response = await fetch(`/api/reportes/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ votar: true })
         });
         const data = await response.json();
-
-        if (response.ok && data.success) {
-          const votosSpan = document.getElementById(`votos-${id}`);
-          if (votosSpan) {
-            votosSpan.innerText = data.bache.votos;
-          }
-          // Recargar para ordenar
-          loadBaches();
+        if (data.success) {
+          loadReports();
         }
-      } catch (error) {
-        console.error('Error al votar:', error);
+      } catch (err) {
+        console.error(err);
       }
     }
 
-    // Carga inicial
-    loadBaches();
+    // Rotar de estado para facilitar el flujo interactivo
+    async function cycleStatus(id, currentStatus) {
+      let nextStatus = 'pendiente';
+      if (currentStatus === 'pendiente') nextStatus = 'en reparación';
+      else if (currentStatus === 'en reparación') nextStatus = 'solucionado';
+      else nextStatus = 'pendiente';
+
+      try {
+        const response = await fetch(`/api/reportes/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ estado: nextStatus })
+        });
+        const data = await response.json();
+        if (data.success) {
+          loadReports();
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // Inicialización al cargar la página
+    loadProfile();
+    loadReports();
   </script>
 </body>
 </html>
