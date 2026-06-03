@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BacheoAlert CBTis 23 - Balizamiento y Señalización</title>
+  <style>
+    :root {
+      --color-bg: #1e222b;
+      --color-card: #282e3d;
+      --color-text-main: #f3f4f6;
+      --color-text-muted: #9ca3af;
+      --color-warning: #fbbf24;
+      --color-danger: #ef4444;
+      --color-accent: #f97316;
+      --color-success: #10b981;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text-main);
+      display: flex;
+      min-height: 100vh;
+    }
+    aside {
+      width: 280px;
+      background-color: #171a21;
+      border-right: 1px solid #374151;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem;
+    }
+    aside h2 {
+      font-size: 1.25rem;
+      color: var(--color-warning);
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    aside nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+    }
+    aside nav a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    aside nav a:hover, aside nav a.active {
+      color: #fff;
+      background-color: var(--color-card);
+      border-left: 4px solid var(--color-accent);
+    }
+    main {
+      flex: 1;
+      padding: 2.5rem;
+      overflow-y: auto;
+    }
+    .header-main {
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #374151;
+      padding-bottom: 1rem;
+    }
+    .header-main h1 {
+      font-size: 2rem;
+      color: #fff;
+    }
+    .card {
+      background-color: var(--color-card);
+      border: 1px solid #374151;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .card h3 {
+      color: var(--color-warning);
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+    .card p {
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .visual-sign {
+      border: 3px dashed var(--color-warning);
+      padding: 1rem;
+      border-radius: 8px;
+      background-color: rgba(251, 191, 36, 0.05);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <aside>
+    <h2>⚠️ BacheoAlert 23</h2>
+    <nav>
+      <a href="dashboard.html">Panel General</a>
+      <a href="nuevo-reporte.html">Registrar Bache</a>
+      <a href="lista-baches.html">Baches Activos</a>
+      <a href="mapa-riesgos.html">Mapa de Riesgos</a>
+      <a href="propuestas.html">Propuestas Técnicas</a>
+      <a href="presupuestos.html">Análisis de Costos</a>
+      <a href="seguridad-vial.html">Manual Escolar</a>
+      <a href="brigadas.html">Brigadas Vecinales</a>
+      <a href="balizamiento.html" class="active">Técnicas de Pintura</a>
+      <a href="contacto-municipio.html">Oficios Municipales</a>
+    </nav>
+  </aside>
+
+  <main>
+    <div class="header-main">
+      <h1>Balizamiento y Señalización Temporal</h1>
+      <p>Esquema visual y preventivo de emergencia para el perímetro del CBTis 23</p>
+    </div>
+
+    <div class="card">
+      <h3>1. Pintura Vial Reflectante de Alta Visibilidad</h3>
+      <p>
+        Ante la demora de la pavimentación oficial, sugerimos pintar el perímetro de cada bache detectado con pintura vial de base solvente color amarillo tránsito con microesfera de vidrio reflectiva.
+      </p>
+      <div class="visual-sign">
+        <span style="color: var(--color-warning); font-weight: bold; font-size: 1.2rem;">⚠️ CUIDADO - BACHE PROFUNDO A 50M</span>
+      </div>
+      <p>
+        El pintado debe delimitar una zona de seguridad a 1 metro de distancia del daño para dar tiempo de reacción a conductores de colectivos y trailers que transitan por la Avenida de las Partidas.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>2. Señales Verticales Provisionales</h3>
+      <p>
+        Elaboración de letreros en madera o lámina de reciclaje con pintura blanca y fluorescente. Estas señales se colocan en caballetes móviles en las esquinas de mayor riesgo escolar (frente al estacionamiento) durante las horas de entrada y salida del plantel.
+      </p>
+    </div>
+  </main>
+</body>
+</html>

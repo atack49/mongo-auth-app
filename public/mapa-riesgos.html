@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BacheoAlert CBTis 23 - Mapa de Riesgos</title>
+  <style>
+    :root {
+      --color-bg: #1e222b;
+      --color-card: #282e3d;
+      --color-text-main: #f3f4f6;
+      --color-text-muted: #9ca3af;
+      --color-warning: #fbbf24;
+      --color-danger: #ef4444;
+      --color-accent: #f97316;
+      --color-success: #10b981;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text-main);
+      display: flex;
+      min-height: 100vh;
+    }
+    aside {
+      width: 280px;
+      background-color: #171a21;
+      border-right: 1px solid #374151;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem;
+    }
+    aside h2 {
+      font-size: 1.25rem;
+      color: var(--color-warning);
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    aside nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+    }
+    aside nav a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    aside nav a:hover, aside nav a.active {
+      color: #fff;
+      background-color: var(--color-card);
+      border-left: 4px solid var(--color-accent);
+    }
+    main {
+      flex: 1;
+      padding: 2.5rem;
+      overflow-y: auto;
+    }
+    .header-main {
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #374151;
+      padding-bottom: 1rem;
+    }
+    .header-main h1 {
+      font-size: 2rem;
+      color: #fff;
+    }
+    .panel {
+      background-color: var(--color-card);
+      border: 1px solid #374151;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    .vialidad-row {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #374151;
+    }
+    .vialidad-row:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .vialidad-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+    .risk-bar-container {
+      background-color: #1e222b;
+      height: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+    .risk-bar {
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.5s ease-in-out;
+    }
+    .risk-desc {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <aside>
+    <h2>⚠️ BacheoAlert 23</h2>
+    <nav>
+      <a href="dashboard.html">Panel General</a>
+      <a href="nuevo-reporte.html">Registrar Bache</a>
+      <a href="lista-baches.html">Baches Activos</a>
+      <a href="mapa-riesgos.html" class="active">Mapa de Riesgos</a>
+      <a href="propuestas.html">Propuestas Técnicas</a>
+      <a href="presupuestos.html">Análisis de Costos</a>
+      <a href="seguridad-vial.html">Manual Escolar</a>
+      <a href="brigadas.html">Brigadas Vecinales</a>
+      <a href="balizamiento.html">Técnicas de Pintura</a>
+      <a href="contacto-municipio.html">Oficios Municipales</a>
+    </nav>
+  </aside>
+
+  <main>
+    <div class="header-main">
+      <h1>Mapa de Riesgos y Puntos Críticos</h1>
+      <p>Simulador de vulnerabilidades en vialidades colindantes al CBTis 23</p>
+    </div>
+
+    <div class="panel">
+      <h3 style="margin-bottom: 1.5rem; color: var(--color-warning);">Nivel de Peligro por Tramo Vial</h3>
+
+      <div class="vialidad-row">
+        <div class="vialidad-info">
+          <span>Avenida de las Partidas (Acceso Industrial)</span>
+          <span style="color: var(--color-danger);">95% - RIESGO EXTREMO</span>
+        </div>
+        <div class="risk-bar-container">
+          <div class="risk-bar" style="width: 95%; background-color: var(--color-danger);"></div>
+        </div>
+        <p class="risk-desc">Tránsito de trailers pesados, nula iluminación nocturna y baches profundos de más de 20cm que acumulan lodo.</p>
+      </div>
+
+      <div class="vialidad-row">
+        <div class="vialidad-info">
+          <span>Calle de Entrada Principal al CBTis 23</span>
+          <span style="color: var(--color-danger);">80% - RIESGO ALTO</span>
+        </div>
+        <div class="risk-bar-container">
+          <div class="risk-bar" style="width: 80%; background-color: var(--color-danger);"></div>
+        </div>
+        <p class="risk-desc">Encharcamientos graves durante lluvias escolares. Los baches quedan ocultos bajo el agua estancada.</p>
+      </div>
+
+      <div class="vialidad-row">
+        <div class="vialidad-info">
+          <span>Esquina del Estacionamiento Escolar</span>
+          <span style="color: var(--color-warning);">60% - RIESGO MEDIO</span>
+        </div>
+        <div class="risk-bar-container">
+          <div class="risk-bar" style="width: 60%; background-color: var(--color-warning);"></div>
+        </div>
+        <p class="risk-desc">Hundimiento gradual del pavimento. Dificulta maniobras de vehículos y de transporte colectivo de alumnos.</p>
+      </div>
+
+      <div class="vialidad-row">
+        <div class="vialidad-info">
+          <span>Parada de Autobuses (Acceso Peatonal)</span>
+          <span style="color: var(--color-warning);">50% - RIESGO MEDIO</span>
+        </div>
+        <div class="risk-bar-container">
+          <div class="risk-bar" style="width: 50%; background-color: var(--color-warning);"></div>
+        </div>
+        <p class="risk-desc">Paso constante de estudiantes. Los autobuses salpican agua y lodo al esquivar los baches en la parada.</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

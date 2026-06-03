@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BacheoAlert CBTis 23 - Brigadas Comunitarias</title>
+  <style>
+    :root {
+      --color-bg: #1e222b;
+      --color-card: #282e3d;
+      --color-text-main: #f3f4f6;
+      --color-text-muted: #9ca3af;
+      --color-warning: #fbbf24;
+      --color-danger: #ef4444;
+      --color-accent: #f97316;
+      --color-success: #10b981;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text-main);
+      display: flex;
+      min-height: 100vh;
+    }
+    aside {
+      width: 280px;
+      background-color: #171a21;
+      border-right: 1px solid #374151;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem;
+    }
+    aside h2 {
+      font-size: 1.25rem;
+      color: var(--color-warning);
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    aside nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+    }
+    aside nav a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    aside nav a:hover, aside nav a.active {
+      color: #fff;
+      background-color: var(--color-card);
+      border-left: 4px solid var(--color-accent);
+    }
+    main {
+      flex: 1;
+      padding: 2.5rem;
+      overflow-y: auto;
+    }
+    .header-main {
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #374151;
+      padding-bottom: 1rem;
+    }
+    .header-main h1 {
+      font-size: 2rem;
+      color: #fff;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2rem;
+    }
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+    .panel {
+      background-color: var(--color-card);
+      border: 1px solid #374151;
+      border-radius: 12px;
+      padding: 2rem;
+    }
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-text-muted);
+      font-weight: 600;
+    }
+    .form-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      background-color: #1e222b;
+      border: 1px solid #374151;
+      color: #fff;
+      font-size: 1rem;
+    }
+    .btn {
+      background-color: var(--color-warning);
+      color: #000;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+    .btn:hover { background-color: var(--color-accent); color: #fff; }
+    .volunteers-list {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .volunteer-tag {
+      background-color: #1e222b;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      border: 1px solid #374151;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+
+  <aside>
+    <h2>⚠️ BacheoAlert 23</h2>
+    <nav>
+      <a href="dashboard.html">Panel General</a>
+      <a href="nuevo-reporte.html">Registrar Bache</a>
+      <a href="lista-baches.html">Baches Activos</a>
+      <a href="mapa-riesgos.html">Mapa de Riesgos</a>
+      <a href="propuestas.html">Propuestas Técnicas</a>
+      <a href="presupuestos.html">Análisis de Costos</a>
+      <a href="seguridad-vial.html">Manual Escolar</a>
+      <a href="brigadas.html" class="active">Brigadas Vecinales</a>
+      <a href="balizamiento.html">Técnicas de Pintura</a>
+      <a href="contacto-municipio.html">Oficios Municipales</a>
+    </nav>
+  </aside>
+
+  <main>
+    <div class="header-main">
+      <h1>Organización de Brigadas Comunitarias</h1>
+      <p>Súmate a las jornadas de limpieza y bacheo voluntario cerca del CBTis 23</p>
+    </div>
+
+    <div class="grid">
+      <div class="panel">
+        <h3 style="margin-bottom: 1.5rem; color: var(--color-warning);">Formulario de Registro de Voluntarios</h3>
+        <form id="brigadaForm">
+          <div class="form-group">
+            <label class="form-label" for="volNombre">Nombre Completo</label>
+            <input type="text" id="volNombre" class="form-input" placeholder="Nombre completo" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="volRol">Rol en el Plantel</label>
+            <select id="volRol" class="form-input" required>
+              <option value="estudiante">Estudiante</option>
+              <option value="docente">Docente / Directivo</option>
+              <option value="padre">Padre de Familia</option>
+              <option value="vecino">Vecino Afectado</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="volActividad">Área de Apoyo</label>
+            <select id="volActividad" class="form-input" required>
+              <option value="Limpieza y preparación del bache">Limpieza y preparación del bache</option>
+              <option value="Mezcla y compactación de asfalto">Mezcla y compactación de asfalto</option>
+              <option value="Balizamiento y vialidad (Seguridad)">Balizamiento y vialidad (Seguridad)</option>
+              <option value="Logística e hidratación">Logística e hidratación</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn">Inscribirse como Voluntario</button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h3 style="color: var(--color-accent); margin-bottom: 1rem;">Voluntarios Registrados</h3>
+        <div class="volunteers-list" id="volsList">
+          <!-- Lista simulada / local storage -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const list = document.getElementById('volsList');
+    let volunteers = JSON.parse(localStorage.getItem('brigadistas')) || [
+      { nombre: 'Carlos Mendoza', rol: 'Estudiante', actividad: 'Mezcla y compactación de asfalto' },
+      { nombre: 'Prof. Mario Robles', rol: 'Docente', actividad: 'Logística e hidratación' }
+    ];
+
+    function renderVols() {
+      list.innerHTML = '';
+      volunteers.forEach(v => {
+        const item = document.createElement('div');
+        item.className = 'volunteer-tag';
+        item.innerHTML = `
+          <div>
+            <strong>${v.nombre}</strong> (${v.rol})
+            <div style="font-size:0.8rem; color: var(--color-text-muted);">${v.actividad}</div>
+          </div>
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    document.getElementById('brigadaForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nombre = document.getElementById('volNombre').value;
+      const rol = document.getElementById('volRol').value;
+      const actividad = document.getElementById('volActividad').value;
+
+      volunteers.push({ nombre, rol, actividad });
+      localStorage.setItem('brigadistas', JSON.stringify(volunteers));
+      document.getElementById('brigadaForm').reset();
+      renderVols();
+    });
+
+    renderVols();
+  </script>
+</body>
+</html>
