@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BacheoAlert - CBTis 23 Lerma</title>
+  <meta name="description" content="Reporta y monitorea el estado de las calles en la zona escolar del CBTis 23 de Lerma, Estado de México.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <div class="logo">
+        <span>🚧</span> BacheoAlert 
+        <span class="logo-cbtis">CBTis 23</span>
+      </div>
+      <div>
+        <a href="register.html" class="btn btn-secondary" style="padding: 6px 16px; font-size: 0.85rem;">Acceder</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container" style="display: flex; align-items: center; justify-content: center; min-height: 70vh;">
+    <div class="card" style="max-width: 650px; text-align: center; padding: 3rem 2rem;">
+      <span style="font-size: 4rem; display: block; margin-bottom: 1rem;">🏫</span>
+      <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Zona Escolar Segura CBTis 23</h1>
+      <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem;">
+        Bienvenido al portal colaborativo de bacheo y seguridad vial de la zona escolar del CBTis 23 en Lerma, Estado de México. Diseñado por estudiantes y para estudiantes para reportar calles en mal estado en el trayecto escolar.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="register.html" class="btn btn-primary">Ingresar Reporte</a>
+        <a href="register.html" class="btn btn-secondary">Ver Baches Activos</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 CBTis 23. Proyecto Escolar de Bacheo y Seguridad Vial, Lerma, Estado de México.</p>
+  </footer>
+
+  <script>
+    // Si ya tiene sesión, redirigir directo al dashboard
+    const user = localStorage.getItem('user');
+    if (user) {
+      window.location.href = 'dashboard.html';
+    }
+  </script>
+</body>
+</html>

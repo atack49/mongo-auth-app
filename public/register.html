@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal de Bacheo CBTis 23 - Zona Escolar Lerma</title>
+  <meta name="description" content="Reporta y monitorea el estado de las calles en la zona escolar del CBTis 23 de Lerma, Estado de México.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <div class="logo">
+        <span>🚧</span> BacheoAlert 
+        <span class="logo-cbtis">CBTis 23</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <div class="auth-wrapper">
+      <div class="auth-header">
+        <h1>Zona Escolar Segura</h1>
+        <p>Portal estudiantil y vecinal para el reporte de baches en el perímetro del CBTis 23 (Lerma, Edomex). Ayúdanos a mejorar el camino a nuestra escuela.</p>
+      </div>
+
+      <div class="card">
+        <h2 style="text-align: center; margin-bottom: 1.5rem;">Ingresar al Portal</h2>
+        
+        <form id="registerForm">
+          <div class="form-group">
+            <label for="name">Tu Nombre Completo</label>
+            <input type="text" id="name" placeholder="Ej. Juan Pérez" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Correo Electrónico</label>
+            <input type="email" id="email" placeholder="Ej. estudiante@cbtis23.edu.mx" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+            Ingresar
+          </button>
+        </form>
+
+        <div id="message" style="margin-top: 1rem; text-align: center; font-size: 0.9rem; font-weight: 500; display: none;"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 CBTis 23. Proyecto Escolar de Bacheo y Seguridad Vial, Lerma, Estado de México.</p>
+  </footer>
+
+  <script>
+    const registerForm = document.getElementById('registerForm');
+    const messageDiv = document.getElementById('message');
+
+    registerForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+
+      messageDiv.style.display = 'block';
+      messageDiv.style.color = 'var(--text-secondary)';
+      messageDiv.innerText = 'Cargando...';
+
+      try {
+        const response = await fetch('/api/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ name, email })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          messageDiv.style.color = 'var(--accent-green)';
+          messageDiv.innerText = '¡Acceso correcto! Redirigiendo...';
+          
+          // Guardar en localStorage para simular sesión sencilla
+          localStorage.setItem('user', JSON.stringify(data.user));
+          
+          setTimeout(() => {
+            window.location.href = 'dashboard.html';
+          }, 1000);
+        } else {
+          messageDiv.style.color = '#ff3b30';
+          messageDiv.innerText = data.message || 'Error al iniciar sesión.';
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        messageDiv.style.color = '#ff3b30';
+        messageDiv.innerText = 'Error al conectar con el servidor.';
+      }
+    });
+  </script>
+</body>
+</html>
