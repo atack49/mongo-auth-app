@@ -3,214 +3,104 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BacheoAlert CBTis 23 - Panel Principal</title>
-  <style>
-    :root {
-      --color-bg: #1e222b;
-      --color-card: #282e3d;
-      --color-text-main: #f3f4f6;
-      --color-text-muted: #9ca3af;
-      --color-warning: #fbbf24;
-      --color-danger: #ef4444;
-      --color-accent: #f97316;
-      --color-success: #10b981;
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    body {
-      background-color: var(--color-bg);
-      color: var(--color-text-main);
-      display: flex;
-      min-height: 100vh;
-    }
-    aside {
-      width: 280px;
-      background-color: #171a21;
-      border-right: 1px solid #374151;
-      display: flex;
-      flex-direction: column;
-      padding: 1.5rem;
-    }
-    aside h2 {
-      font-size: 1.25rem;
-      color: var(--color-warning);
-      margin-bottom: 2rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    aside nav {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      flex: 1;
-    }
-    aside nav a {
-      color: var(--color-text-muted);
-      text-decoration: none;
-      padding: 0.75rem 1rem;
-      border-radius: 6px;
-      font-weight: 500;
-      transition: all 0.2s;
-    }
-    aside nav a:hover, aside nav a.active {
-      color: #fff;
-      background-color: var(--color-card);
-      border-left: 4px solid var(--color-accent);
-    }
-    main {
-      flex: 1;
-      padding: 2.5rem;
-      overflow-y: auto;
-    }
-    .header-main {
-      margin-bottom: 2rem;
-      border-bottom: 1px solid #374151;
-      padding-bottom: 1rem;
-    }
-    .header-main h1 {
-      font-size: 2rem;
-      color: #fff;
-    }
-    .header-main p {
-      color: var(--color-text-muted);
-      font-size: 0.95rem;
-      margin-top: 0.25rem;
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2.5rem;
-    }
-    .stat-card {
-      background-color: var(--color-card);
-      border: 1px solid #374151;
-      border-radius: 12px;
-      padding: 1.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .stat-card::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 4px;
-      height: 100%;
-    }
-    .stat-card.danger::after { background-color: var(--color-danger); }
-    .stat-card.warning::after { background-color: var(--color-warning); }
-    .stat-card.success::after { background-color: var(--color-success); }
-    
-    .stat-title {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      color: var(--color-text-muted);
-      letter-spacing: 0.5px;
-    }
-    .stat-number {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: #fff;
-      margin: 0.5rem 0;
-    }
-    .stat-desc {
-      font-size: 0.85rem;
-      color: var(--color-text-muted);
-    }
-    .welcome-card {
-      background: linear-gradient(135deg, var(--color-card), #1e2530);
-      border: 1px solid #374151;
-      border-radius: 12px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-    }
-    .welcome-card h3 {
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-      color: var(--color-warning);
-    }
-    .welcome-card p {
-      color: var(--color-text-muted);
-      margin-bottom: 1rem;
-      line-height: 1.6;
-    }
-  </style>
+  <title>BacheoAlert CBTis 23 - Panel General</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Menú lateral común -->
-  <aside>
-    <h2>⚠️ BacheoAlert 23</h2>
-    <nav>
-      <a href="dashboard.html" class="active">Panel General</a>
-      <a href="nuevo-reporte.html">Registrar Bache</a>
-      <a href="lista-baches.html">Baches Activos</a>
-      <a href="mapa-riesgos.html">Mapa de Riesgos</a>
-      <a href="propuestas.html">Propuestas Técnicas</a>
-      <a href="presupuestos.html">Análisis de Costos</a>
-      <a href="seguridad-vial.html">Manual Escolar</a>
-      <a href="brigadas.html">Brigadas Vecinales</a>
-      <a href="balizamiento.html">Técnicas de Pintura</a>
-      <a href="contacto-municipio.html">Oficios Municipales</a>
-    </nav>
-  </aside>
-
-  <!-- Contenedor Principal -->
-  <main>
-    <div class="header-main">
-      <h1>Panel de Control Integrador</h1>
-      <p>Infraestructura comunitaria del CBTis 23, Lerma, Estado de México</p>
-    </div>
-
-    <div class="welcome-card">
-      <h3>Bienvenido al Portal BacheoAlert CBTis 23</h3>
-      <p>
-        Este portal ha sido desarrollado para concentrar todas las iniciativas, estadísticas y reportes de la comunidad educativa respecto a la crisis asfáltica que rodea el plantel escolar. Usa la barra lateral de navegación para registrar incidentes, consultar presupuestos, revisar la seguridad vial y generar los documentos formales dirigidos al Ayuntamiento de Lerma.
-      </p>
-    </div>
-
-    <div class="stats-grid">
-      <div class="stat-card danger">
-        <div class="stat-title">Baches Críticos Detectados</div>
-        <div class="stat-number" id="criticosCount">Cargando...</div>
-        <div class="stat-desc">Zonas altamente peligrosas como Av. de las Partidas</div>
-      </div>
-      <div class="stat-card warning">
-        <div class="stat-title">En Proceso de Reparación</div>
-        <div class="stat-number" id="procesoCount">Cargando...</div>
-        <div class="stat-desc">Pendientes de pavimentación local</div>
-      </div>
-      <div class="stat-card success">
-        <div class="stat-title">Votos y Apoyos Registrados</div>
-        <div class="stat-number" id="votosCount">Cargando...</div>
-        <div class="stat-desc">Validaciones activas de alumnos y vecinos</div>
+  <!-- Cabecera Superior -->
+  <header>
+    <div class="header-container">
+      <a href="dashboard.html" class="header-logo">
+        <span>🚧</span> BacheoAlert CBTis 23
+      </a>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 0.9rem; color: var(--text-muted);">Lerma, Edomex</span>
+        <button class="btn-logout" id="logoutBtn">Cerrar Sesión</button>
       </div>
     </div>
-  </main>
+  </header>
+
+  <!-- Contenedor del Layout Principal -->
+  <div class="layout-container">
+    
+    <!-- Sidebar de Navegación -->
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <a href="dashboard.html" class="sidebar-link active">Panel General</a>
+        <a href="nuevo-reporte.html" class="sidebar-link">Registrar Bache</a>
+        <a href="lista-baches.html" class="sidebar-link">Baches Activos</a>
+        <a href="mapa-riesgos.html" class="sidebar-link">Mapa de Riesgos</a>
+        <a href="propuestas.html" class="sidebar-link">Propuestas Técnicas</a>
+        <a href="presupuestos.html" class="sidebar-link">Análisis de Costos</a>
+        <a href="seguridad-vial.html" class="sidebar-link">Manual Escolar</a>
+        <a href="brigadas.html" class="sidebar-link">Brigadas Vecinales</a>
+        <a href="balizamiento.html" class="sidebar-link">Técnicas de Pintura</a>
+        <a href="contacto-municipio.html" class="sidebar-link">Oficios Municipales</a>
+      </div>
+    </aside>
+
+    <!-- Área de Contenido Principal -->
+    <main class="content-area">
+      <div class="card" style="padding: 2.5rem;">
+        <h2 class="card-title">Bienvenido al Portal de Gestión Vial</h2>
+        <p class="card-subtitle">Seguimiento de la infraestructura vial en la periferia de nuestra preparatoria</p>
+        <p style="color: var(--text-main); font-size: 1rem; line-height: 1.6;">
+          Usa el menú lateral para navegar por las distintas secciones. Puedes reportar baches, revisar el mapa de calor de tramos peligrosos, consultar los presupuestos estimados para las jornadas de faena escolar y generar cartas oficiales dirigidas al ayuntamiento de Lerma.
+        </p>
+      </div>
+
+      <!-- Tarjetas de Estadísticas -->
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-box-title" style="color: var(--accent-red);">Reportados</div>
+          <div class="stat-box-value" id="statsReportados">Cargando...</div>
+          <div class="stat-box-desc">Reportes de baches abiertos</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-title" style="color: var(--accent-yellow);">En Proceso</div>
+          <div class="stat-box-value" id="statsProceso">Cargando...</div>
+          <div class="stat-box-desc">Pavimentaciones activas</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-title" style="color: var(--accent-green);">Reparados</div>
+          <div class="stat-box-value" id="statsReparados">Cargando...</div>
+          <div class="stat-box-desc">Baches solucionados</div>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Portal de Bacheo Escolar CBTis 23. Lerma, Estado de México.</p>
+  </footer>
 
   <script>
-    // Obtener estadísticas de la API '/api/baches' o '/api/reportes'
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = 'login.html';
+    }
+
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      localStorage.removeItem('token');
+      window.location.href = 'login.html';
+    });
+
     async function loadStats() {
       try {
-        const res = await fetch('/api/reportes');
-        const data = await res.json();
+        const response = await fetch('/api/reportes');
+        const data = await response.json();
+        
         if (data.success) {
           const baches = data.reportes;
-          let criticos = baches.filter(b => b.severidad === 'crítica' && b.estado !== 'solucionado').length;
-          let enProceso = baches.filter(b => b.estado === 'en reparación').length;
-          let totalVotos = baches.reduce((acc, curr) => acc + (curr.votos || 0), 0);
+          const reportados = baches.filter(b => b.estado === 'pendiente').length;
+          const enProceso = baches.filter(b => b.estado === 'en reparación').length;
+          const reparados = baches.filter(b => b.estado === 'solucionado').length;
 
-          document.getElementById('criticosCount').textContent = criticos;
-          document.getElementById('procesoCount').textContent = enProceso;
-          document.getElementById('votosCount').textContent = totalVotos;
+          document.getElementById('statsReportados').textContent = reportados;
+          document.getElementById('statsProceso').textContent = enProceso;
+          document.getElementById('statsReparados').textContent = reparados;
         } else {
           fallbackStats();
         }
@@ -220,9 +110,9 @@
     }
 
     function fallbackStats() {
-      document.getElementById('criticosCount').textContent = "12";
-      document.getElementById('procesoCount').textContent = "4";
-      document.getElementById('votosCount').textContent = "156";
+      document.getElementById('statsReportados').textContent = "12";
+      document.getElementById('statsProceso').textContent = "4";
+      document.getElementById('statsReparados').textContent = "8";
     }
 
     loadStats();

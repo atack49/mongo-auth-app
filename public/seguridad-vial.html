@@ -4,158 +4,118 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BacheoAlert CBTis 23 - Seguridad Vial</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    :root {
-      --color-bg: #1e222b;
-      --color-card: #282e3d;
-      --color-text-main: #f3f4f6;
-      --color-text-muted: #9ca3af;
-      --color-warning: #fbbf24;
-      --color-danger: #ef4444;
-      --color-accent: #f97316;
-      --color-success: #10b981;
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    body {
-      background-color: var(--color-bg);
-      color: var(--color-text-main);
-      display: flex;
-      min-height: 100vh;
-    }
-    aside {
-      width: 280px;
-      background-color: #171a21;
-      border-right: 1px solid #374151;
-      display: flex;
-      flex-direction: column;
-      padding: 1.5rem;
-    }
-    aside h2 {
-      font-size: 1.25rem;
-      color: var(--color-warning);
-      margin-bottom: 2rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    aside nav {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      flex: 1;
-    }
-    aside nav a {
-      color: var(--color-text-muted);
-      text-decoration: none;
-      padding: 0.75rem 1rem;
-      border-radius: 6px;
-      font-weight: 500;
-      transition: all 0.2s;
-    }
-    aside nav a:hover, aside nav a.active {
-      color: #fff;
-      background-color: var(--color-card);
-      border-left: 4px solid var(--color-accent);
-    }
-    main {
-      flex: 1;
-      padding: 2.5rem;
-      overflow-y: auto;
-    }
-    .header-main {
-      margin-bottom: 2rem;
-      border-bottom: 1px solid #374151;
-      padding-bottom: 1rem;
-    }
-    .header-main h1 {
-      font-size: 2rem;
-      color: #fff;
-    }
-    .grid {
+    .safety-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
     }
-    .card {
-      background-color: var(--color-card);
-      border: 1px solid #374151;
-      border-radius: 12px;
-      padding: 1.5rem;
+    .safety-card {
+      background-color: var(--bg-card);
+      border-radius: var(--border-radius-card);
+      border: var(--border-light);
+      box-shadow: var(--shadow-subtle);
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
-    .card h3 {
-      color: var(--color-accent);
-      margin-bottom: 1rem;
+    .safety-card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--accent-blue);
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-    .card ul {
+    .safety-list {
       list-style-type: none;
-      color: var(--color-text-muted);
-      font-size: 0.95rem;
       display: flex;
       flex-direction: column;
       gap: 0.8rem;
     }
-    .card ul li {
+    .safety-list li {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      line-height: 1.5;
       position: relative;
       padding-left: 1.25rem;
     }
-    .card ul li::before {
-      content: '⚡';
+    .safety-list li::before {
+      content: '•';
       position: absolute;
       left: 0;
-      color: var(--color-warning);
+      color: var(--accent-blue);
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
 
-  <aside>
-    <h2>⚠️ BacheoAlert 23</h2>
-    <nav>
-      <a href="dashboard.html">Panel General</a>
-      <a href="nuevo-reporte.html">Registrar Bache</a>
-      <a href="lista-baches.html">Baches Activos</a>
-      <a href="mapa-riesgos.html">Mapa de Riesgos</a>
-      <a href="propuestas.html">Propuestas Técnicas</a>
-      <a href="presupuestos.html">Análisis de Costos</a>
-      <a href="seguridad-vial.html" class="active">Manual Escolar</a>
-      <a href="brigadas.html">Brigadas Vecinales</a>
-      <a href="balizamiento.html">Técnicas de Pintura</a>
-      <a href="contacto-municipio.html">Oficios Municipales</a>
-    </nav>
-  </aside>
-
-  <main>
-    <div class="header-main">
-      <h1>Manual de Prevención y Seguridad Vial</h1>
-      <p>Recomendaciones para alumnos del CBTis 23 durante trayectos peligrosos</p>
-    </div>
-
-    <div class="grid">
-      <div class="card">
-        <h3>🚶‍♂️ Para Peatones (Estudiantes)</h3>
-        <ul>
-          <li><strong>Evita charcos profundos:</strong> El agua estancada en las banquetas colindantes al CBTis 23 suele ocultar baches de más de 30 cm de profundidad.</li>
-          <li><strong>Cruza con precaución:</strong> Los automovilistas y trailers a menudo maniobran bruscamente para esquivar baches, perdiendo control.</li>
-          <li><strong>Visibilidad nocturna:</strong> Utiliza mochilas reflectantes o la linterna del celular al caminar sobre Av. de las Partidas de noche.</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>🚴‍♂️ Para Ciclistas y Motociclistas</h3>
-        <ul>
-          <li><strong>Velocidad reducida:</strong> En temporada de lluvias la visibilidad del asfalto disminuye un 70%. Mantén el freno alerta.</li>
-          <li><strong>Distancia de seguridad:</strong> No te ubiques pegado detrás de los autobuses; podrías caer en un bache que ellos libren.</li>
-          <li><strong>Casco abrochado:</strong> La caída por baches es la principal causa de accidentes de moto en la periferia industrial de Lerma.</li>
-        </ul>
+  <!-- Cabecera Superior -->
+  <header>
+    <div class="header-container">
+      <a href="dashboard.html" class="header-logo">
+        <span>🚧</span> BacheoAlert CBTis 23
+      </a>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 0.9rem; color: var(--text-muted);">Lerma, Edomex</span>
       </div>
     </div>
-  </main>
+  </header>
+
+  <!-- Contenedor del Layout Principal -->
+  <div class="layout-container">
+    
+    <!-- Sidebar de Navegación -->
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <a href="dashboard.html" class="sidebar-link">Panel General</a>
+        <a href="nuevo-reporte.html" class="sidebar-link">Registrar Bache</a>
+        <a href="lista-baches.html" class="sidebar-link">Baches Activos</a>
+        <a href="mapa-riesgos.html" class="sidebar-link">Mapa de Riesgos</a>
+        <a href="propuestas.html" class="sidebar-link">Propuestas Técnicas</a>
+        <a href="presupuestos.html" class="sidebar-link">Análisis de Costos</a>
+        <a href="seguridad-vial.html" class="sidebar-link active">Manual Escolar</a>
+        <a href="brigadas.html" class="sidebar-link">Brigadas Vecinales</a>
+        <a href="balizamiento.html" class="sidebar-link">Técnicas de Pintura</a>
+        <a href="contacto-municipio.html" class="sidebar-link">Oficios Municipales</a>
+      </div>
+    </aside>
+
+    <!-- Área de Contenido Principal -->
+    <main class="content-area">
+      <div class="card" style="border: none; background: transparent; box-shadow: none; padding: 0;">
+        <h2 class="card-title">Manual de Seguridad y Prevención Vial</h2>
+        <p class="card-subtitle">Consejos de prevención dirigidos a alumnos del CBTis 23 en zonas de pavimentación dañada</p>
+      </div>
+
+      <div class="safety-grid">
+        <div class="safety-card">
+          <h3>🚶‍♂️ Peatones y Alumnos</h3>
+          <ul class="safety-list">
+            <li><strong>Zonas con inundaciones:</strong> Evita cruzar por tramos encharcados en la calle de entrada; la profundidad del lodo oculta baches peligrosos.</li>
+            <li><strong>Maniobras imprevistas:</strong> Mantente alerta al cruzar, los vehículos y colectivos suelen dar volantazos rápidos para esquivar baches.</li>
+            <li><strong>Ropa de visibilidad:</strong> Por la noche, camina sobre Av. de las Partidas usando elementos claros o la linterna encendida del móvil.</li>
+          </ul>
+        </div>
+
+        <div class="safety-card">
+          <h3>🏍️ Ciclistas y Motociclistas</h3>
+          <ul class="safety-list">
+            <li><strong>Velocidad controlada:</strong> Disminuye la velocidad a la mitad en temporada de lluvias, para asegurar tiempo de reacción ante baches.</li>
+            <li><strong>Evita seguir muy pegado:</strong> Los autobuses escolares pueden esquivar baches dejándolos descubiertos de golpe ante ti.</li>
+            <li><strong>Casco homologado:</strong> Las caídas accidentales en baches son la causa número uno de incidentes de dos ruedas en Lerma.</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Portal de Bacheo Escolar CBTis 23. Lerma, Estado de México.</p>
+  </footer>
 </body>
 </html>

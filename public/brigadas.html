@@ -3,135 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BacheoAlert CBTis 23 - Brigadas Comunitarias</title>
+  <title>BacheoAlert CBTis 23 - Brigadas de Bacheo</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    :root {
-      --color-bg: #1e222b;
-      --color-card: #282e3d;
-      --color-text-main: #f3f4f6;
-      --color-text-muted: #9ca3af;
-      --color-warning: #fbbf24;
-      --color-danger: #ef4444;
-      --color-accent: #f97316;
-      --color-success: #10b981;
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    body {
-      background-color: var(--color-bg);
-      color: var(--color-text-main);
-      display: flex;
-      min-height: 100vh;
-    }
-    aside {
-      width: 280px;
-      background-color: #171a21;
-      border-right: 1px solid #374151;
-      display: flex;
-      flex-direction: column;
-      padding: 1.5rem;
-    }
-    aside h2 {
-      font-size: 1.25rem;
-      color: var(--color-warning);
-      margin-bottom: 2rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    aside nav {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      flex: 1;
-    }
-    aside nav a {
-      color: var(--color-text-muted);
-      text-decoration: none;
-      padding: 0.75rem 1rem;
-      border-radius: 6px;
-      font-weight: 500;
-      transition: all 0.2s;
-    }
-    aside nav a:hover, aside nav a.active {
-      color: #fff;
-      background-color: var(--color-card);
-      border-left: 4px solid var(--color-accent);
-    }
-    main {
-      flex: 1;
-      padding: 2.5rem;
-      overflow-y: auto;
-    }
-    .header-main {
-      margin-bottom: 2rem;
-      border-bottom: 1px solid #374151;
-      padding-bottom: 1rem;
-    }
-    .header-main h1 {
-      font-size: 2rem;
-      color: #fff;
-    }
-    .grid {
+    .brigada-grid {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
       gap: 2rem;
     }
     @media (max-width: 900px) {
-      .grid { grid-template-columns: 1fr; }
+      .brigada-grid {
+        grid-template-columns: 1fr;
+      }
     }
-    .panel {
-      background-color: var(--color-card);
-      border: 1px solid #374151;
-      border-radius: 12px;
-      padding: 2rem;
-    }
-    .form-group {
-      margin-bottom: 1.2rem;
-    }
-    .form-label {
-      display: block;
-      font-size: 0.9rem;
-      margin-bottom: 0.5rem;
-      color: var(--color-text-muted);
-      font-weight: 600;
-    }
-    .form-input {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-      background-color: #1e222b;
-      border: 1px solid #374151;
-      color: #fff;
-      font-size: 1rem;
-    }
-    .btn {
-      background-color: var(--color-warning);
-      color: #000;
-      padding: 0.8rem;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      width: 100%;
-      font-size: 1rem;
-      transition: all 0.2s;
-    }
-    .btn:hover { background-color: var(--color-accent); color: #fff; }
-    .volunteers-list {
-      margin-top: 1.5rem;
+    .vol-list {
       display: flex;
       flex-direction: column;
       gap: 0.8rem;
+      margin-top: 1rem;
     }
-    .volunteer-tag {
-      background-color: #1e222b;
+    .vol-item {
+      background-color: #f5f5f7;
+      border: var(--border-light);
       padding: 0.8rem 1rem;
       border-radius: 8px;
-      border: 1px solid #374151;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -140,105 +35,121 @@
 </head>
 <body>
 
-  <aside>
-    <h2>⚠️ BacheoAlert 23</h2>
-    <nav>
-      <a href="dashboard.html">Panel General</a>
-      <a href="nuevo-reporte.html">Registrar Bache</a>
-      <a href="lista-baches.html">Baches Activos</a>
-      <a href="mapa-riesgos.html">Mapa de Riesgos</a>
-      <a href="propuestas.html">Propuestas Técnicas</a>
-      <a href="presupuestos.html">Análisis de Costos</a>
-      <a href="seguridad-vial.html">Manual Escolar</a>
-      <a href="brigadas.html" class="active">Brigadas Vecinales</a>
-      <a href="balizamiento.html">Técnicas de Pintura</a>
-      <a href="contacto-municipio.html">Oficios Municipales</a>
-    </nav>
-  </aside>
-
-  <main>
-    <div class="header-main">
-      <h1>Organización de Brigadas Comunitarias</h1>
-      <p>Súmate a las jornadas de limpieza y bacheo voluntario cerca del CBTis 23</p>
-    </div>
-
-    <div class="grid">
-      <div class="panel">
-        <h3 style="margin-bottom: 1.5rem; color: var(--color-warning);">Formulario de Registro de Voluntarios</h3>
-        <form id="brigadaForm">
-          <div class="form-group">
-            <label class="form-label" for="volNombre">Nombre Completo</label>
-            <input type="text" id="volNombre" class="form-input" placeholder="Nombre completo" required>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="volRol">Rol en el Plantel</label>
-            <select id="volRol" class="form-input" required>
-              <option value="estudiante">Estudiante</option>
-              <option value="docente">Docente / Directivo</option>
-              <option value="padre">Padre de Familia</option>
-              <option value="vecino">Vecino Afectado</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="volActividad">Área de Apoyo</label>
-            <select id="volActividad" class="form-input" required>
-              <option value="Limpieza y preparación del bache">Limpieza y preparación del bache</option>
-              <option value="Mezcla y compactación de asfalto">Mezcla y compactación de asfalto</option>
-              <option value="Balizamiento y vialidad (Seguridad)">Balizamiento y vialidad (Seguridad)</option>
-              <option value="Logística e hidratación">Logística e hidratación</option>
-            </select>
-          </div>
-
-          <button type="submit" class="btn">Inscribirse como Voluntario</button>
-        </form>
+  <!-- Cabecera Superior -->
+  <header>
+    <div class="header-container">
+      <a href="dashboard.html" class="header-logo">
+        <span>🚧</span> BacheoAlert CBTis 23
+      </a>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 0.9rem; color: var(--text-muted);">Lerma, Edomex</span>
       </div>
+    </div>
+  </header>
 
-      <div class="panel">
-        <h3 style="color: var(--color-accent); margin-bottom: 1rem;">Voluntarios Registrados</h3>
-        <div class="volunteers-list" id="volsList">
-          <!-- Lista simulada / local storage -->
+  <!-- Contenedor del Layout Principal -->
+  <div class="layout-container">
+    
+    <!-- Sidebar de Navegación -->
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <a href="dashboard.html" class="sidebar-link">Panel General</a>
+        <a href="nuevo-reporte.html" class="sidebar-link">Registrar Bache</a>
+        <a href="lista-baches.html" class="sidebar-link">Baches Activos</a>
+        <a href="mapa-riesgos.html" class="sidebar-link">Mapa de Riesgos</a>
+        <a href="propuestas.html" class="sidebar-link">Propuestas Técnicas</a>
+        <a href="presupuestos.html" class="sidebar-link">Análisis de Costos</a>
+        <a href="seguridad-vial.html" class="sidebar-link">Manual Escolar</a>
+        <a href="brigadas.html" class="sidebar-link active">Brigadas Vecinales</a>
+        <a href="balizamiento.html" class="sidebar-link">Técnicas de Pintura</a>
+        <a href="contacto-municipio.html" class="sidebar-link">Oficios Municipales</a>
+      </div>
+    </aside>
+
+    <!-- Área de Contenido Principal -->
+    <main class="content-area">
+      <div class="brigada-grid">
+        <!-- Formulario -->
+        <div class="card">
+          <h2 class="card-title">Jornadas de Bacheo Voluntario</h2>
+          <p class="card-subtitle">Inscríbete a las cuadrillas organizadas por alumnos, padres y docentes</p>
+
+          <form id="volunteerForm">
+            <div class="form-group">
+              <label class="form-label" for="volNombre">Nombre Completo</label>
+              <input type="text" id="volNombre" class="form-input" placeholder="Tu nombre" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="volGrupo">Grupo / Especialidad (o Rol)</label>
+              <input type="text" id="volGrupo" class="form-input" placeholder="Ej. 4to semestre - Programación / Padre de familia" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="volRol">Rol en la Faena</label>
+              <select id="volRol" class="form-input" required style="background-color: #f5f5f7;">
+                <option value="Limpieza y preparación">Limpieza y preparación previa</option>
+                <option value="Aplicación de mezcla">Aplicación de asfalto en frío</option>
+                <option value="Señalización vial">Señalización y control vial</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn" style="width: 100%;">Inscribirse</button>
+          </form>
+        </div>
+
+        <!-- Lista de voluntarios -->
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1.2rem; color: var(--accent-blue);">Voluntarios Inscritos</h3>
+          <div class="vol-list" id="volList">
+            <!-- Render dinámico -->
+          </div>
         </div>
       </div>
-    </div>
-  </main>
+    </main>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Portal de Bacheo Escolar CBTis 23. Lerma, Estado de México.</p>
+  </footer>
 
   <script>
-    const list = document.getElementById('volsList');
-    let volunteers = JSON.parse(localStorage.getItem('brigadistas')) || [
-      { nombre: 'Carlos Mendoza', rol: 'Estudiante', actividad: 'Mezcla y compactación de asfalto' },
-      { nombre: 'Prof. Mario Robles', rol: 'Docente', actividad: 'Logística e hidratación' }
+    const list = document.getElementById('volList');
+    let volunteers = JSON.parse(localStorage.getItem('brigadistas_v2')) || [
+      { nombre: 'Carlos Mendoza', grupo: '6to Programación', rol: 'Aplicación de mezcla' },
+      { nombre: 'Juan Ramírez', grupo: 'Padre de familia', rol: 'Señalización vial' }
     ];
 
-    function renderVols() {
+    function render() {
       list.innerHTML = '';
       volunteers.forEach(v => {
-        const item = document.createElement('div');
-        item.className = 'volunteer-tag';
-        item.innerHTML = `
+        const div = document.createElement('div');
+        div.className = 'vol-item';
+        div.innerHTML = `
           <div>
-            <strong>${v.nombre}</strong> (${v.rol})
-            <div style="font-size:0.8rem; color: var(--color-text-muted);">${v.actividad}</div>
+            <strong>${v.nombre}</strong>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">${v.grupo}</div>
           </div>
+          <span class="badge badge-blue" style="font-size: 0.7rem;">${v.rol}</span>
         `;
-        list.appendChild(item);
+        list.appendChild(div);
       });
     }
 
-    document.getElementById('brigadaForm').addEventListener('submit', (e) => {
+    document.getElementById('volunteerForm').addEventListener('submit', (e) => {
       e.preventDefault();
       const nombre = document.getElementById('volNombre').value;
+      const grupo = document.getElementById('volGrupo').value;
       const rol = document.getElementById('volRol').value;
-      const actividad = document.getElementById('volActividad').value;
 
-      volunteers.push({ nombre, rol, actividad });
-      localStorage.setItem('brigadistas', JSON.stringify(volunteers));
-      document.getElementById('brigadaForm').reset();
-      renderVols();
+      volunteers.push({ nombre, grupo, rol });
+      localStorage.setItem('brigadistas_v2', JSON.stringify(volunteers));
+      document.getElementById('volunteerForm').reset();
+      render();
     });
 
-    renderVols();
+    render();
   </script>
 </body>
 </html>

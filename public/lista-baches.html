@@ -3,171 +3,113 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BacheoAlert CBTis 23 - Monitoreo Activo</title>
+  <title>BacheoAlert CBTis 23 - Monitoreo de Reportes</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    :root {
-      --color-bg: #1e222b;
-      --color-card: #282e3d;
-      --color-text-main: #f3f4f6;
-      --color-text-muted: #9ca3af;
-      --color-warning: #fbbf24;
-      --color-danger: #ef4444;
-      --color-accent: #f97316;
-      --color-success: #10b981;
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    body {
-      background-color: var(--color-bg);
-      color: var(--color-text-main);
-      display: flex;
-      min-height: 100vh;
-    }
-    aside {
-      width: 280px;
-      background-color: #171a21;
-      border-right: 1px solid #374151;
-      display: flex;
-      flex-direction: column;
-      padding: 1.5rem;
-    }
-    aside h2 {
-      font-size: 1.25rem;
-      color: var(--color-warning);
-      margin-bottom: 2rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    aside nav {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      flex: 1;
-    }
-    aside nav a {
-      color: var(--color-text-muted);
-      text-decoration: none;
-      padding: 0.75rem 1rem;
-      border-radius: 6px;
-      font-weight: 500;
-      transition: all 0.2s;
-    }
-    aside nav a:hover, aside nav a.active {
-      color: #fff;
-      background-color: var(--color-card);
-      border-left: 4px solid var(--color-accent);
-    }
-    main {
-      flex: 1;
-      padding: 2.5rem;
-      overflow-y: auto;
-    }
-    .header-main {
-      margin-bottom: 2rem;
-      border-bottom: 1px solid #374151;
-      padding-bottom: 1rem;
-    }
-    .header-main h1 {
-      font-size: 2rem;
-      color: #fff;
-    }
     .list-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 1.5rem;
     }
-    .card {
-      background-color: var(--color-card);
-      border: 1px solid #374151;
-      border-radius: 12px;
+    .bache-card {
+      background-color: var(--bg-card);
+      border-radius: var(--border-radius-card);
+      border: var(--border-light);
+      box-shadow: var(--shadow-subtle);
       padding: 1.5rem;
       display: flex;
       flex-direction: column;
       gap: 0.8rem;
     }
-    .card-title {
+    .bache-title {
       font-size: 1.15rem;
-      font-weight: 700;
-      color: #fff;
+      font-weight: 600;
+      color: var(--text-main);
     }
-    .card-loc {
+    .bache-loc {
       font-size: 0.9rem;
-      color: var(--color-warning);
+      color: var(--accent-blue);
       font-weight: 600;
     }
-    .card-desc {
+    .bache-desc {
       font-size: 0.9rem;
-      color: var(--color-text-muted);
+      color: var(--text-muted);
       line-height: 1.5;
       flex-grow: 1;
     }
-    .badges {
+    .badge-row {
       display: flex;
       gap: 0.5rem;
     }
-    .badge {
-      font-size: 0.75rem;
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
-      text-transform: uppercase;
-      font-weight: bold;
-    }
-    .badge-baja { background-color: rgba(16, 185, 129, 0.2); color: var(--color-success); }
-    .badge-media { background-color: rgba(251, 191, 36, 0.2); color: var(--color-warning); }
-    .badge-critica { background-color: rgba(239, 68, 68, 0.2); color: var(--color-danger); }
-    
-    .badge-pendiente { background-color: rgba(249, 115, 22, 0.2); color: var(--color-accent); }
-    .badge-reparacion { background-color: rgba(251, 191, 36, 0.2); color: var(--color-warning); }
-    .badge-solucionado { background-color: rgba(16, 185, 129, 0.2); color: var(--color-success); }
-
-    .btn-vote {
-      background-color: rgba(249, 115, 22, 0.1);
-      border: 1px solid var(--color-accent);
-      color: var(--color-accent);
+    .btn-support {
+      background-color: #f5f5f7;
+      color: var(--text-main);
+      border: var(--border-light);
       padding: 0.5rem;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
-      font-weight: bold;
+      font-weight: 600;
       transition: all 0.2s;
+      font-size: 0.85rem;
+      text-align: center;
     }
-    .btn-vote:hover {
-      background-color: var(--color-accent);
+    .btn-support:hover {
+      background-color: var(--accent-blue);
       color: #fff;
+      border-color: var(--accent-blue);
     }
   </style>
 </head>
 <body>
 
-  <aside>
-    <h2>⚠️ BacheoAlert 23</h2>
-    <nav>
-      <a href="dashboard.html">Panel General</a>
-      <a href="nuevo-reporte.html">Registrar Bache</a>
-      <a href="lista-baches.html" class="active">Baches Activos</a>
-      <a href="mapa-riesgos.html">Mapa de Riesgos</a>
-      <a href="propuestas.html">Propuestas Técnicas</a>
-      <a href="presupuestos.html">Análisis de Costos</a>
-      <a href="seguridad-vial.html">Manual Escolar</a>
-      <a href="brigadas.html">Brigadas Vecinales</a>
-      <a href="balizamiento.html">Técnicas de Pintura</a>
-      <a href="contacto-municipio.html">Oficios Municipales</a>
-    </nav>
-  </aside>
-
-  <main>
-    <div class="header-main">
-      <h1>Monitoreo de Reportes Activos</h1>
-      <p>Consulta el estado de los baches reportados en Lerma, Edomex</p>
+  <!-- Cabecera Superior -->
+  <header>
+    <div class="header-container">
+      <a href="dashboard.html" class="header-logo">
+        <span>🚧</span> BacheoAlert CBTis 23
+      </a>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 0.9rem; color: var(--text-muted);">Lerma, Edomex</span>
+      </div>
     </div>
+  </header>
 
-    <div class="list-grid" id="bachesGrid">
-      <p style="color: var(--color-text-muted);">Cargando baches reportados...</p>
-    </div>
-  </main>
+  <!-- Contenedor del Layout Principal -->
+  <div class="layout-container">
+    
+    <!-- Sidebar de Navegación -->
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <a href="dashboard.html" class="sidebar-link">Panel General</a>
+        <a href="nuevo-reporte.html" class="sidebar-link">Registrar Bache</a>
+        <a href="lista-baches.html" class="sidebar-link active">Baches Activos</a>
+        <a href="mapa-riesgos.html" class="sidebar-link">Mapa de Riesgos</a>
+        <a href="propuestas.html" class="sidebar-link">Propuestas Técnicas</a>
+        <a href="presupuestos.html" class="sidebar-link">Análisis de Costos</a>
+        <a href="seguridad-vial.html" class="sidebar-link">Manual Escolar</a>
+        <a href="brigadas.html" class="sidebar-link">Brigadas Vecinales</a>
+        <a href="balizamiento.html" class="sidebar-link">Técnicas de Pintura</a>
+        <a href="contacto-municipio.html" class="sidebar-link">Oficios Municipales</a>
+      </div>
+    </aside>
+
+    <!-- Área de Contenido Principal -->
+    <main class="content-area">
+      <div class="card" style="border: none; background: transparent; box-shadow: none; padding: 0;">
+        <h2 class="card-title">Monitoreo de Reportes Activos</h2>
+        <p class="card-subtitle">Listado de afectaciones viales validadas por los alumnos y vecinos</p>
+      </div>
+
+      <div class="list-grid" id="bachesGrid">
+        <p style="color: var(--text-muted);">Cargando baches reportados...</p>
+      </div>
+    </main>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Portal de Bacheo Escolar CBTis 23. Lerma, Estado de México.</p>
+  </footer>
 
   <script>
     async function loadBaches() {
@@ -180,28 +122,34 @@
         if (data.success && data.reportes.length > 0) {
           data.reportes.forEach(rep => {
             const card = document.createElement('div');
-            card.className = 'card';
+            card.className = 'bache-card';
+            
+            // Determinar color de badge de severidad
+            let badgeClass = 'badge-blue';
+            if (rep.severidad === 'media') badgeClass = 'badge-yellow';
+            if (rep.severidad === 'crítica') badgeClass = 'badge-red';
+
             card.innerHTML = `
-              <div class="card-title">${rep.descripcion.split(' - ')[0] || 'Reporte de Bache'}</div>
-              <div class="card-loc">📍 ${rep.ubicacion}</div>
-              <p class="card-desc">${rep.descripcion.split(' - ')[1] || rep.descripcion}</p>
-              <div class="badges">
-                <span class="badge badge-${rep.severidad}">${rep.severidad}</span>
-                <span class="badge badge-${rep.estado === 'en reparación' ? 'reparacion' : rep.estado}">${rep.estado}</span>
+              <div class="bache-title">${rep.descripcion.split(' - ')[0] || 'Reporte de Bache'}</div>
+              <div class="bache-loc">📍 ${rep.ubicacion}</div>
+              <p class="bache-desc">${rep.descripcion.split(' - ')[1] || rep.descripcion}</p>
+              <div class="badge-row">
+                <span class="badge ${badgeClass}">${rep.severidad}</span>
+                <span class="badge badge-blue" style="background-color: rgba(0, 0, 0, 0.05); color: var(--text-main);">${rep.estado}</span>
               </div>
-              <button class="btn-vote" onclick="vote('${rep._id}')">👍 Apoyar Reporte (${rep.votos || 0})</button>
+              <button class="btn-support" onclick="support('${rep._id}')">👍 Apoyar Reporte (${rep.votos || 0})</button>
             `;
             grid.appendChild(card);
           });
         } else {
-          grid.innerHTML = '<p style="color: var(--color-text-muted);">No hay reportes viales activos en este momento.</p>';
+          grid.innerHTML = '<p style="color: var(--text-muted);">No hay reportes de baches registrados en este momento.</p>';
         }
       } catch (err) {
-        document.getElementById('bachesGrid').innerHTML = '<p style="color: var(--color-danger);">Error al cargar los baches desde el servidor.</p>';
+        document.getElementById('bachesGrid').innerHTML = '<p style="color: var(--accent-red);">Error al cargar los reportes de baches del servidor.</p>';
       }
     }
 
-    async function vote(id) {
+    async function support(id) {
       try {
         const response = await fetch(`/api/reportes/${id}`, {
           method: 'PUT',

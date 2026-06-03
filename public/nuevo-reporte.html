@@ -4,194 +4,90 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BacheoAlert CBTis 23 - Registrar Bache</title>
-  <style>
-    :root {
-      --color-bg: #1e222b;
-      --color-card: #282e3d;
-      --color-text-main: #f3f4f6;
-      --color-text-muted: #9ca3af;
-      --color-warning: #fbbf24;
-      --color-danger: #ef4444;
-      --color-accent: #f97316;
-      --color-success: #10b981;
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    body {
-      background-color: var(--color-bg);
-      color: var(--color-text-main);
-      display: flex;
-      min-height: 100vh;
-    }
-    aside {
-      width: 280px;
-      background-color: #171a21;
-      border-right: 1px solid #374151;
-      display: flex;
-      flex-direction: column;
-      padding: 1.5rem;
-    }
-    aside h2 {
-      font-size: 1.25rem;
-      color: var(--color-warning);
-      margin-bottom: 2rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    aside nav {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      flex: 1;
-    }
-    aside nav a {
-      color: var(--color-text-muted);
-      text-decoration: none;
-      padding: 0.75rem 1rem;
-      border-radius: 6px;
-      font-weight: 500;
-      transition: all 0.2s;
-    }
-    aside nav a:hover, aside nav a.active {
-      color: #fff;
-      background-color: var(--color-card);
-      border-left: 4px solid var(--color-accent);
-    }
-    main {
-      flex: 1;
-      padding: 2.5rem;
-      overflow-y: auto;
-    }
-    .header-main {
-      margin-bottom: 2rem;
-      border-bottom: 1px solid #374151;
-      padding-bottom: 1rem;
-    }
-    .header-main h1 {
-      font-size: 2rem;
-      color: #fff;
-    }
-    .form-container {
-      background-color: var(--color-card);
-      border: 1px solid #374151;
-      border-radius: 12px;
-      padding: 2rem;
-      max-width: 600px;
-    }
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-    .form-label {
-      display: block;
-      font-size: 0.9rem;
-      margin-bottom: 0.5rem;
-      color: var(--color-text-muted);
-      font-weight: 600;
-    }
-    .form-input {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-      background-color: #1e222b;
-      border: 1px solid #374151;
-      color: #fff;
-      font-size: 1rem;
-    }
-    .form-input:focus {
-      outline: none;
-      border-color: var(--color-accent);
-    }
-    .btn {
-      background: linear-gradient(135deg, var(--color-accent), #ea580c);
-      color: white;
-      padding: 0.8rem 2rem;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      width: 100%;
-      font-size: 1rem;
-      transition: transform 0.2s;
-    }
-    .btn:hover {
-      transform: translateY(-1px);
-    }
-    .msg {
-      margin-top: 1rem;
-      padding: 0.75rem;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      display: none;
-    }
-    .msg.error { background-color: rgba(239, 68, 68, 0.2); color: var(--color-danger); }
-    .msg.success { background-color: rgba(16, 185, 129, 0.2); color: var(--color-success); }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <aside>
-    <h2>⚠️ BacheoAlert 23</h2>
-    <nav>
-      <a href="dashboard.html">Panel General</a>
-      <a href="nuevo-reporte.html" class="active">Registrar Bache</a>
-      <a href="lista-baches.html">Baches Activos</a>
-      <a href="mapa-riesgos.html">Mapa de Riesgos</a>
-      <a href="propuestas.html">Propuestas Técnicas</a>
-      <a href="presupuestos.html">Análisis de Costos</a>
-      <a href="seguridad-vial.html">Manual Escolar</a>
-      <a href="brigadas.html">Brigadas Vecinales</a>
-      <a href="balizamiento.html">Técnicas de Pintura</a>
-      <a href="contacto-municipio.html">Oficios Municipales</a>
-    </nav>
-  </aside>
-
-  <main>
-    <div class="header-main">
-      <h1>Registrar Nuevo Bache</h1>
-      <p>Colabora documentando los baches en la periferia del CBTis 23</p>
+  <!-- Cabecera Superior -->
+  <header>
+    <div class="header-container">
+      <a href="dashboard.html" class="header-logo">
+        <span>🚧</span> BacheoAlert CBTis 23
+      </a>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 0.9rem; color: var(--text-muted);">Lerma, Edomex</span>
+      </div>
     </div>
+  </header>
 
-    <div class="form-container">
-      <form id="reportForm">
-        <div class="form-group">
-          <label class="form-label" for="titulo">Título Breve del Problema</label>
-          <input type="text" id="titulo" class="form-input" placeholder="Ej. Zanja peligrosa en acceso" required>
-        </div>
+  <!-- Contenedor del Layout Principal -->
+  <div class="layout-container">
+    
+    <!-- Sidebar de Navegación -->
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <a href="dashboard.html" class="sidebar-link">Panel General</a>
+        <a href="nuevo-reporte.html" class="sidebar-link active">Registrar Bache</a>
+        <a href="lista-baches.html" class="sidebar-link">Baches Activos</a>
+        <a href="mapa-riesgos.html" class="sidebar-link">Mapa de Riesgos</a>
+        <a href="propuestas.html" class="sidebar-link">Propuestas Técnicas</a>
+        <a href="presupuestos.html" class="sidebar-link">Análisis de Costos</a>
+        <a href="seguridad-vial.html" class="sidebar-link">Manual Escolar</a>
+        <a href="brigadas.html" class="sidebar-link">Brigadas Vecinales</a>
+        <a href="balizamiento.html" class="sidebar-link">Técnicas de Pintura</a>
+        <a href="contacto-municipio.html" class="sidebar-link">Oficios Municipales</a>
+      </div>
+    </aside>
 
-        <div class="form-group">
-          <label class="form-label" for="ubicacion">Ubicación</label>
-          <select id="ubicacion" class="form-input" required>
-            <option value="" disabled selected>Selecciona un punto crítico</option>
-            <option value="Avenida de las Partidas">Avenida de las Partidas</option>
-            <option value="Entrada Principal">Entrada Principal del Plantel</option>
-            <option value="Esquina del Estacionamiento Escolar">Esquina del Estacionamiento Escolar</option>
-            <option value="Parada de Autobuses">Parada de Autobuses (CBTis 23)</option>
-          </select>
-        </div>
+    <!-- Área de Contenido Principal -->
+    <main class="content-area">
+      <div class="card" style="max-width: 600px;">
+        <h2 class="card-title">Registrar Daño Vial</h2>
+        <p class="card-subtitle">Ayúdanos a documentar las zonas críticas que ponen en riesgo a los estudiantes</p>
 
-        <div class="form-group">
-          <label class="form-label" for="severidad">Nivel de Gravedad</label>
-          <select id="severidad" class="form-input" required>
-            <option value="baja">Baja (Grieta superficial)</option>
-            <option value="media">Media (Hoyo mediano)</option>
-            <option value="crítica">Alta (Profundo y peligroso)</option>
-          </select>
-        </div>
+        <form id="reportForm">
+          <div class="form-group">
+            <label class="form-label" for="titulo">Título Breve</label>
+            <input type="text" id="titulo" class="form-input" placeholder="Ej. Bache profundo en entrada" required>
+          </div>
 
-        <div class="form-group">
-          <label class="form-label" for="descripcion">Descripción Detallada del Daño</label>
-          <textarea id="descripcion" class="form-input" rows="4" placeholder="Especifica el tamaño del bache, riesgos para peatones/vehículos..." required style="resize: none;"></textarea>
-        </div>
+          <div class="form-group">
+            <label class="form-label" for="ubicacion">Ubicación Seleccionada</label>
+            <select id="ubicacion" class="form-input" required style="background-color: #f5f5f7;">
+              <option value="" disabled selected>Selecciona un punto en Lerma</option>
+              <option value="Avenida de las Partidas">Avenida de las Partidas</option>
+              <option value="Entrada Principal">Entrada Principal del Plantel</option>
+              <option value="Esquina del Estacionamiento">Esquina del Estacionamiento</option>
+              <option value="Parada de Autobuses">Parada de Autobuses</option>
+            </select>
+          </div>
 
-        <button type="submit" class="btn">Enviar Reporte Vial</button>
-      </form>
-      <div id="statusMsg" class="msg"></div>
-    </div>
-  </main>
+          <div class="form-group">
+            <label class="form-label" for="severidad">Nivel de Gravedad</label>
+            <select id="severidad" class="form-input" required style="background-color: #f5f5f7;">
+              <option value="baja">Baja (Daño superficial)</option>
+              <option value="media">Media (Hoyo regular)</option>
+              <option value="crítica">Alta (Profundo y riesgoso)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="descripcion">Descripción</label>
+            <textarea id="descripcion" class="form-input" rows="4" placeholder="Especifica los detalles del bache y riesgos..." required style="resize: none; background-color: #f5f5f7;"></textarea>
+          </div>
+
+          <button type="submit" class="btn" style="width: 100%;">Enviar Reporte</button>
+        </form>
+
+        <div id="statusMessage" style="margin-top: 1rem; padding: 0.75rem; border-radius: 8px; font-size: 0.9rem; text-align: center; display: none;"></div>
+      </div>
+    </main>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Portal de Bacheo Escolar CBTis 23. Lerma, Estado de México.</p>
+  </footer>
 
   <script>
     document.getElementById('reportForm').addEventListener('submit', async (e) => {
@@ -201,9 +97,9 @@
       const severidad = document.getElementById('severidad').value;
       const descripcion = `${titulo} - ${document.getElementById('descripcion').value}`;
       const token = localStorage.getItem('token');
-      const statusMsg = document.getElementById('statusMsg');
+      const msgDiv = document.getElementById('statusMessage');
 
-      statusMsg.style.display = 'none';
+      msgDiv.style.display = 'none';
 
       try {
         const response = await fetch('/api/reportes', {
@@ -217,19 +113,22 @@
 
         const data = await response.json();
         if (data.success) {
-          statusMsg.className = 'msg success';
-          statusMsg.textContent = '¡Reporte registrado exitosamente para la zona del CBTis 23!';
-          statusMsg.style.display = 'block';
+          msgDiv.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
+          msgDiv.style.color = 'var(--accent-green)';
+          msgDiv.textContent = '¡Reporte registrado exitosamente en la base de datos!';
+          msgDiv.style.display = 'block';
           document.getElementById('reportForm').reset();
         } else {
-          statusMsg.className = 'msg error';
-          statusMsg.textContent = data.message || 'Error al guardar el reporte.';
-          statusMsg.style.display = 'block';
+          msgDiv.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+          msgDiv.style.color = 'var(--accent-red)';
+          msgDiv.textContent = data.message || 'Error al guardar el reporte.';
+          msgDiv.style.display = 'block';
         }
       } catch (err) {
-        statusMsg.className = 'msg error';
-        statusMsg.textContent = 'Error de red al conectar con el servidor.';
-        statusMsg.style.display = 'block';
+        msgDiv.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+        msgDiv.style.color = 'var(--accent-red)';
+        msgDiv.textContent = 'Error al comunicar con el servidor.';
+        msgDiv.style.display = 'block';
       }
     });
   </script>

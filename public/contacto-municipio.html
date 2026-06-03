@@ -3,172 +3,101 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BacheoAlert CBTis 23 - Oficios Municipales</title>
+  <title>BacheoAlert CBTis 23 - Oficio de Petición</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    :root {
-      --color-bg: #1e222b;
-      --color-card: #282e3d;
-      --color-text-main: #f3f4f6;
-      --color-text-muted: #9ca3af;
-      --color-warning: #fbbf24;
-      --color-danger: #ef4444;
-      --color-accent: #f97316;
-      --color-success: #10b981;
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    body {
-      background-color: var(--color-bg);
-      color: var(--color-text-main);
-      display: flex;
-      min-height: 100vh;
-    }
-    aside {
-      width: 280px;
-      background-color: #171a21;
-      border-right: 1px solid #374151;
-      display: flex;
-      flex-direction: column;
-      padding: 1.5rem;
-    }
-    aside h2 {
-      font-size: 1.25rem;
-      color: var(--color-warning);
-      margin-bottom: 2rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    aside nav {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      flex: 1;
-    }
-    aside nav a {
-      color: var(--color-text-muted);
-      text-decoration: none;
-      padding: 0.75rem 1rem;
-      border-radius: 6px;
-      font-weight: 500;
-      transition: all 0.2s;
-    }
-    aside nav a:hover, aside nav a.active {
-      color: #fff;
-      background-color: var(--color-card);
-      border-left: 4px solid var(--color-accent);
-    }
-    main {
-      flex: 1;
-      padding: 2.5rem;
-      overflow-y: auto;
-    }
-    .header-main {
-      margin-bottom: 2rem;
-      border-bottom: 1px solid #374151;
-      padding-bottom: 1rem;
-    }
-    .header-main h1 {
-      font-size: 2rem;
-      color: #fff;
-    }
-    .panel {
-      background-color: var(--color-card);
-      border: 1px solid #374151;
-      border-radius: 12px;
-      padding: 2rem;
-      margin-bottom: 1.5rem;
-    }
-    .oficio-preview {
+    .oficio-hoja {
       background-color: #fff;
       color: #000;
-      padding: 2.5rem;
-      border-radius: 6px;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 0.9rem;
-      line-height: 1.5;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      padding: 3rem;
+      border-radius: 8px;
       border: 1px solid #ddd;
-      margin-top: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 1.5rem 0;
     }
-    .btn-print {
-      background-color: var(--color-success);
-      color: #fff;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 1rem;
-    }
-    .btn-print:hover { opacity: 0.9; }
   </style>
 </head>
 <body>
 
-  <aside>
-    <h2>⚠️ BacheoAlert 23</h2>
-    <nav>
-      <a href="dashboard.html">Panel General</a>
-      <a href="nuevo-reporte.html">Registrar Bache</a>
-      <a href="lista-baches.html">Baches Activos</a>
-      <a href="mapa-riesgos.html">Mapa de Riesgos</a>
-      <a href="propuestas.html">Propuestas Técnicas</a>
-      <a href="presupuestos.html">Análisis de Costos</a>
-      <a href="seguridad-vial.html">Manual Escolar</a>
-      <a href="brigadas.html">Brigadas Vecinales</a>
-      <a href="balizamiento.html">Técnicas de Pintura</a>
-      <a href="contacto-municipio.html" class="active">Oficios Municipales</a>
-    </nav>
-  </aside>
-
-  <main>
-    <div class="header-main">
-      <h1>Generador de Oficios Municipales</h1>
-      <p>Genera y descarga peticiones formales dirigidas al Ayuntamiento de Lerma</p>
-    </div>
-
-    <div class="panel">
-      <h3 style="color: var(--color-warning);">Plantilla de Oficio al Ayuntamiento</h3>
-      <p style="color: var(--color-text-muted); font-size: 0.95rem;">
-        Esta plantilla recopila la solicitud de la comunidad escolar exigiendo la pronta reparación del asfalto en los accesos del plantel.
-      </p>
-
-      <button class="btn-print" onclick="window.print()">🖨️ Imprimir Oficio de Petición</button>
-
-      <div class="oficio-preview" id="oficio">
-        <p style="text-align: right;"><strong>ASUNTO:</strong> Solicitud Urgente de Bacheo y Pavimentación en Zona Escolar.<br>
-        <strong>LUGAR:</strong> Lerma de Villada, Estado de México.<br>
-        <strong>FECHA:</strong> <span id="fechaActual">03 de Junio de 2026</span></p>
-
-        <br>
-        <p><strong>C. PRESIDENTE MUNICIPAL DE LERMA</strong><br>
-        <strong>H. AYUNTAMIENTO DE LERMA, EDOMEX</strong><br>
-        <strong>PRESENTE.</strong></p>
-
-        <br>
-        <p>Los abajo firmantes, en representación de la comunidad escolar del <strong>CBTis 23</strong>, vecinos de la colonia y transportistas del sector industrial colindante, nos dirigimos a usted de la manera más atenta para solicitar su intervención urgente respecto al estado crítico de la infraestructura vial en las inmediaciones del plantel educativo.</p>
-
-        <br>
-        <p>Particularmente, la **Avenida de las Partidas** y la calle de **Entrada Principal al CBTis 23** registran averías de gravedad que ponen en peligro la integridad física de los alumnos en temporada de lluvias, impiden el libre tránsito de los vehículos escolares y dañan permanentemente la suspensión de autobuses colectivos y de carga.</p>
-
-        <br>
-        <p>Agradeciendo de antemano su atención a la presente y en espera de una pronta y favorable respuesta para salvaguardar a nuestros estudiantes, quedamos de usted.</p>
-
-        <br>
-        <p style="text-align: center; margin-top: 3rem;"><strong>ATENTAMENTE,</strong></p>
-        <p style="text-align: center; margin-top: 2rem;">_________________________________________<br>
-        <strong>COMUNIDAD EDUCATIVA Y VECINOS DEL CBTIS 23</strong></p>
+  <!-- Cabecera Superior -->
+  <header>
+    <div class="header-container">
+      <a href="dashboard.html" class="header-logo">
+        <span>🚧</span> BacheoAlert CBTis 23
+      </a>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 0.9rem; color: var(--text-muted);">Lerma, Edomex</span>
       </div>
     </div>
-  </main>
+  </header>
+
+  <!-- Contenedor del Layout Principal -->
+  <div class="layout-container">
+    
+    <!-- Sidebar de Navegación -->
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <a href="dashboard.html" class="sidebar-link">Panel General</a>
+        <a href="nuevo-reporte.html" class="sidebar-link">Registrar Bache</a>
+        <a href="lista-baches.html" class="sidebar-link">Baches Activos</a>
+        <a href="mapa-riesgos.html" class="sidebar-link">Mapa de Riesgos</a>
+        <a href="propuestas.html" class="sidebar-link">Propuestas Técnicas</a>
+        <a href="presupuestos.html" class="sidebar-link">Análisis de Costos</a>
+        <a href="seguridad-vial.html" class="sidebar-link">Manual Escolar</a>
+        <a href="brigadas.html" class="sidebar-link">Brigadas Vecinales</a>
+        <a href="balizamiento.html" class="sidebar-link">Técnicas de Pintura</a>
+        <a href="contacto-municipio.html" class="sidebar-link active">Oficios Municipales</a>
+      </div>
+    </aside>
+
+    <!-- Área de Contenido Principal -->
+    <main class="content-area">
+      <div class="card">
+        <h2 class="card-title">Generador de Oficios Formales</h2>
+        <p class="card-subtitle">Carta formal automatizada para solicitar reparación vial al Ayuntamiento de Lerma</p>
+
+        <button class="btn" onclick="window.print()">🖨️ Imprimir Carta de Petición</button>
+
+        <div class="oficio-hoja">
+          <p style="text-align: right;"><strong>ASUNTO:</strong> Solicitud de pavimentación urgente en accesos escolares.<br>
+          <strong>UBICACIÓN:</strong> Lerma de Villada, Edo. de México.<br>
+          <strong>FECHA:</strong> <span id="currentDate">03 de Junio de 2026</span></p>
+
+          <br>
+          <p><strong>C. PRESIDENTE MUNICIPAL DE LERMA</strong><br>
+          <strong>H. AYUNTAMIENTO DE LERMA</strong><br>
+          <strong>ESTADO DE MÉXICO</strong><br>
+          <strong>PRESENTE.</strong></p>
+
+          <br>
+          <p>Los suscritos miembros de la comunidad educativa del <strong>CBTis 23</strong>, alumnos, personal docente y padres de familia, nos dirigimos a usted con respeto para solicitar de manera urgente el inicio de trabajos de bacheo y pavimentación en los accesos principales a nuestra institución.</p>
+
+          <p>Las afectaciones en la <strong>Avenida de las Partidas</strong> y la calle de **Entrada Principal al CBTis 23** representan un peligro constante para la seguridad e integridad física de los estudiantes y el correcto tránsito del transporte escolar, habiéndose agravado debido al continuo tránsito pesado y las inundaciones recientes de la región.</p>
+
+          <p>Agradeciendo de antemano su atención a la presente, quedamos en espera de sus valiosas indicaciones para dar solución definitiva a esta problemática en favor de la seguridad de la juventud estudiosa de Lerma.</p>
+
+          <br><br>
+          <p style="text-align: center;"><strong>ATENTAMENTE,</strong></p>
+          <br><br>
+          <p style="text-align: center;">___________________________________________<br>
+          <strong>COMUNIDAD ESCOLAR DEL CBTIS 23</strong></p>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Portal de Bacheo Escolar CBTis 23. Lerma, Estado de México.</p>
+  </footer>
 
   <script>
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    document.getElementById('fechaActual').textContent = new Date().toLocaleDateString('es-MX', options);
+    document.getElementById('currentDate').textContent = new Date().toLocaleDateString('es-MX', options);
   </script>
 </body>
 </html>
