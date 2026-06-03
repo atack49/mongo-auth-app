@@ -15,7 +15,7 @@
         <span>🚧</span> BacheoAlert CBTis 23
       </a>
       <div style="display: flex; align-items: center; gap: 1rem;">
-        <span style="font-size: 0.9rem; color: var(--text-muted);">Lerma, Edomex</span>
+        <span style="font-size: 0.9rem; color: var(--text-muted);" id="userWelcomeText">Estudiante</span>
         <button class="btn-logout" id="logoutBtn">Cerrar Sesión</button>
       </div>
     </div>
@@ -43,7 +43,7 @@
     <!-- Área de Contenido Principal -->
     <main class="content-area">
       <div class="card" style="padding: 2.5rem;">
-        <h2 class="card-title">Bienvenido al Portal de Gestión Vial</h2>
+        <h2 class="card-title">Portal de Gestión Vial</h2>
         <p class="card-subtitle">Seguimiento de la infraestructura vial en la periferia de nuestra preparatoria</p>
         <p style="color: var(--text-main); font-size: 1rem; line-height: 1.6;">
           Usa el menú lateral para navegar por las distintas secciones. Puedes reportar baches, revisar el mapa de calor de tramos peligrosos, consultar los presupuestos estimados para las jornadas de faena escolar y generar cartas oficiales dirigidas al ayuntamiento de Lerma.
@@ -78,25 +78,31 @@
 
   <script>
     const token = localStorage.getItem('token');
+    const userData = localStorage.getItem('user');
     if (!token) {
       window.location.href = 'login.html';
     }
 
+    if (userData) {
+      const user = JSON.parse(userData);
+      document.getElementById('userWelcomeText').textContent = `Hola, ${user.name} (${user.specialty})`;
+    }
+
     document.getElementById('logoutBtn').addEventListener('click', () => {
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
       window.location.href = 'login.html';
     });
 
-    async function loadStats() {
-      try {
-        const response = await fetch('/api/reportes');
-        const data = await response.json();
-        
+    function loadStats() {
+      fetch('/api/baches')
+      .then(res => res.json())
+      .then(data => {
         if (data.success) {
-          const baches = data.reportes;
-          const reportados = baches.filter(b => b.estado === 'pendiente').length;
-          const enProceso = baches.filter(b => b.estado === 'en reparación').length;
-          const reparados = baches.filter(b => b.estado === 'solucionado').length;
+          const baches = data.baches;
+          const reportados = baches.filter(b => b.estado === 'Reportado').length;
+          const enProceso = baches.filter(b => b.estado === 'En proceso').length;
+          const reparados = baches.filter(b => b.estado === 'Reparado').length;
 
           document.getElementById('statsReportados').textContent = reportados;
           document.getElementById('statsProceso').textContent = enProceso;
@@ -104,15 +110,14 @@
         } else {
           fallbackStats();
         }
-      } catch (err) {
-        fallbackStats();
-      }
+      })
+      .catch(() => fallbackStats());
     }
 
     function fallbackStats() {
-      document.getElementById('statsReportados').textContent = "12";
-      document.getElementById('statsProceso').textContent = "4";
-      document.getElementById('statsReparados').textContent = "8";
+      document.getElementById('statsReportados').textContent = "8";
+      document.getElementById('statsProceso').textContent = "3";
+      document.getElementById('statsReparados').textContent = "5";
     }
 
     loadStats();

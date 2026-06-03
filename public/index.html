@@ -3,57 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bacheo CETis 23 - Portal Comunitario de Lerma, Edomex</title>
+  <title>BacheoAlert CBTis 23 - Inicio</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .hero-container {
+      max-width: 800px;
+      margin: 5rem auto;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--text-main);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title span {
+      color: var(--accent-blue);
+    }
+    .hero-text {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+  </style>
 </head>
 <body>
+
   <header>
-    <div class="nav-container">
-      <div class="logo">
-        ⚠️ Lerma<span>Bacheo-CETis23</span>
+    <div class="header-container">
+      <a href="index.html" class="header-logo">
+        <span>🚧</span> BacheoAlert CBTis 23
+      </a>
+      <div style="display: flex; gap: 1rem;">
+        <a href="login.html" class="nav-link" style="margin-top: 5px;">Ingresar</a>
+        <a href="register.html" class="btn" style="padding: 0.4rem 1.2rem; font-size: 0.9rem; border-radius: 9999px;">Registrarse</a>
       </div>
-      <ul class="nav-links">
-        <li><a href="/" class="active">Inicio</a></li>
-        <li><a href="login.html">Ingresar</a></li>
-        <li><a href="register.html" class="btn-nav-action">Registrarse</a></li>
-      </ul>
     </div>
   </header>
 
-  <main class="hero">
-    <div class="hero-grid">
-      <div class="hero-content">
-        <h1>Reporte de Bacheo Comunitario zona <span>CETis 23</span></h1>
-        <p>
-          El deterioro asfáltico en la zona de Lerma, Estado de México, se ha visto agravado por el constante tránsito de vehículos de carga pesada procedentes del parque industrial y las recurrentes inundaciones. Esta plataforma permite a los estudiantes, transportistas y vecinos documentar de manera directa las afectaciones viales críticas que impactan la seguridad de nuestro plantel escolar en el CETis 23.
-        </p>
-        <div class="hero-actions">
-          <a href="register.html" class="btn btn-primary">Registrar Reporte</a>
-          <a href="login.html" class="btn btn-secondary">Explorar Portal</a>
-        </div>
-      </div>
-      <div class="glass-panel text-center">
-        <h3 style="margin-bottom: 1.5rem; color: var(--accent-orange);">Zona Crítica de Atención</h3>
-        <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1rem;">
-          Puntos altamente vulnerables identificados:
-        </p>
-        <ul style="text-align: left; list-style: none; padding-left: 0; font-size: 0.9rem; display: flex; flex-direction: column; gap: 0.8rem;">
-          <li style="border-left: 3px solid var(--accent-red); padding-left: 0.8rem;">
-            <strong>Avenida de las Partidas:</strong> Alto tráfico industrial de transportes pesados que fractura el asfalto.
-          </li>
-          <li style="border-left: 3px solid var(--accent-yellow); padding-left: 0.8rem;">
-            <strong>Calle frente al CETis 23:</strong> Acumulación de agua pluvial y lodo que oculta baches profundos.
-          </li>
-          <li style="border-left: 3px solid var(--accent-cyan); padding-left: 0.8rem;">
-            <strong>Av. Tecnológico:</strong> Rutas de llegada de estudiantes en transporte colectivo en estado crítico.
-          </li>
-        </ul>
-      </div>
+  <div class="hero-container">
+    <h1 class="hero-title">Reporte de Daños Viales para el <span>CBTis 23</span></h1>
+    <p class="hero-text">
+      El paso constante de vehículos de carga del parque industrial y las inundaciones recurrentes deterioran severamente el pavimento de Lerma, afectando el traslado diario de la comunidad del CBTis 23. Únete a BacheoAlert para reportar, votar y dar seguimiento a los baches críticos.
+    </p>
+    <div class="hero-buttons">
+      <a href="register.html" class="btn">Registrar Reporte</a>
+      <a href="login.html" class="btn btn-secondary">Explorar Panel</a>
     </div>
-  </main>
+  </div>
 
   <footer>
-    <p>&copy; 2026 Portal de Bacheo Comunitario CETis 23. Lerma, Estado de México. Desarrollado para mejorar la infraestructura y movilidad de nuestra comunidad estudiantil.</p>
+    <p>&copy; 2026 Portal de Bacheo Escolar CBTis 23. Lerma, Estado de México.</p>
   </footer>
 </body>
 </html>

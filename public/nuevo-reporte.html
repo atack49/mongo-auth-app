@@ -43,18 +43,18 @@
     <main class="content-area">
       <div class="card" style="max-width: 600px;">
         <h2 class="card-title">Registrar Daño Vial</h2>
-        <p class="card-subtitle">Ayúdanos a documentar las zonas críticas que ponen en riesgo a los estudiantes</p>
+        <p class="card-subtitle">Reporta los baches para coordinar su reparación con la comunidad</p>
 
         <form id="reportForm">
           <div class="form-group">
-            <label class="form-label" for="titulo">Título Breve</label>
-            <input type="text" id="titulo" class="form-input" placeholder="Ej. Bache profundo en entrada" required>
+            <label class="form-label" for="titulo">Título Breve del Problema</label>
+            <input type="text" id="titulo" class="form-input" placeholder="Ej. Hundimiento peligroso" required>
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="ubicacion">Ubicación Seleccionada</label>
+            <label class="form-label" for="ubicacion">Ubicación</label>
             <select id="ubicacion" class="form-input" required style="background-color: #f5f5f7;">
-              <option value="" disabled selected>Selecciona un punto en Lerma</option>
+              <option value="" disabled selected>Selecciona un punto crítico</option>
               <option value="Avenida de las Partidas">Avenida de las Partidas</option>
               <option value="Entrada Principal">Entrada Principal del Plantel</option>
               <option value="Esquina del Estacionamiento">Esquina del Estacionamiento</option>
@@ -65,14 +65,14 @@
           <div class="form-group">
             <label class="form-label" for="severidad">Nivel de Gravedad</label>
             <select id="severidad" class="form-input" required style="background-color: #f5f5f7;">
-              <option value="baja">Baja (Daño superficial)</option>
-              <option value="media">Media (Hoyo regular)</option>
-              <option value="crítica">Alta (Profundo y riesgoso)</option>
+              <option value="Baja">Baja (Daño menor)</option>
+              <option value="Media">Media (Hoyo regular)</option>
+              <option value="Alta">Alta (Profundo y riesgoso)</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="descripcion">Descripción</label>
+            <label class="form-label" for="descripcion">Descripción Detallada</label>
             <textarea id="descripcion" class="form-input" rows="4" placeholder="Especifica los detalles del bache y riesgos..." required style="resize: none; background-color: #f5f5f7;"></textarea>
           </div>
 
@@ -90,32 +90,27 @@
   </footer>
 
   <script>
-    document.getElementById('reportForm').addEventListener('submit', async (e) => {
+    document.getElementById('reportForm').addEventListener('submit', (e) => {
       e.preventDefault();
       const titulo = document.getElementById('titulo').value;
       const ubicacion = document.getElementById('ubicacion').value;
       const severidad = document.getElementById('severidad').value;
-      const descripcion = `${titulo} - ${document.getElementById('descripcion').value}`;
-      const token = localStorage.getItem('token');
+      const descripcion = document.getElementById('descripcion').value;
       const msgDiv = document.getElementById('statusMessage');
 
       msgDiv.style.display = 'none';
 
-      try {
-        const response = await fetch('/api/reportes', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({ ubicacion, severidad, descripcion })
-        });
-
-        const data = await response.json();
+      fetch('/api/baches', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ titulo, ubicacion, severidad, descripcion })
+      })
+      .then(res => res.json())
+      .then(data => {
         if (data.success) {
           msgDiv.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
           msgDiv.style.color = 'var(--accent-green)';
-          msgDiv.textContent = '¡Reporte registrado exitosamente en la base de datos!';
+          msgDiv.textContent = '¡Reporte enviado exitosamente!';
           msgDiv.style.display = 'block';
           document.getElementById('reportForm').reset();
         } else {
@@ -124,12 +119,13 @@
           msgDiv.textContent = data.message || 'Error al guardar el reporte.';
           msgDiv.style.display = 'block';
         }
-      } catch (err) {
+      })
+      .catch(() => {
         msgDiv.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
         msgDiv.style.color = 'var(--accent-red)';
         msgDiv.textContent = 'Error al comunicar con el servidor.';
         msgDiv.style.display = 'block';
-      }
+      });
     });
   </script>
 </body>

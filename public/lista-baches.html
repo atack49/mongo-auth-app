@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BacheoAlert CBTis 23 - Monitoreo de Reportes</title>
+  <title>BacheoAlert CBTis 23 - Monitoreo Urbano</title>
   <link rel="stylesheet" href="style.css">
   <style>
     .list-grid {
@@ -96,8 +96,8 @@
     <!-- Área de Contenido Principal -->
     <main class="content-area">
       <div class="card" style="border: none; background: transparent; box-shadow: none; padding: 0;">
-        <h2 class="card-title">Monitoreo de Reportes Activos</h2>
-        <p class="card-subtitle">Listado de afectaciones viales validadas por los alumnos y vecinos</p>
+        <h2 class="card-title">Monitoreo Urbano</h2>
+        <p class="card-subtitle">Consulta y apoya las peticiones de pavimentación escolar</p>
       </div>
 
       <div class="list-grid" id="bachesGrid">
@@ -112,59 +112,58 @@
   </footer>
 
   <script>
-    async function loadBaches() {
-      try {
-        const response = await fetch('/api/reportes');
-        const data = await response.json();
+    function loadBaches() {
+      fetch('/api/baches')
+      .then(res => res.json())
+      .then(data => {
         const grid = document.getElementById('bachesGrid');
         grid.innerHTML = '';
 
-        if (data.success && data.reportes.length > 0) {
-          data.reportes.forEach(rep => {
+        if (data.success && data.baches.length > 0) {
+          data.baches.forEach(rep => {
             const card = document.createElement('div');
             card.className = 'bache-card';
             
-            // Determinar color de badge de severidad
-            let badgeClass = 'badge-blue';
-            if (rep.severidad === 'media') badgeClass = 'badge-yellow';
-            if (rep.severidad === 'crítica') badgeClass = 'badge-red';
+            let badgeClass = 'badge-baja';
+            if (rep.severidad === 'Media') badgeClass = 'badge-media';
+            if (rep.severidad === 'Alta') badgeClass = 'badge-alta';
+
+            let stateClass = 'badge-reportado';
+            if (rep.estado === 'En proceso') stateClass = 'badge-proceso';
+            if (rep.estado === 'Reparado') stateClass = 'badge-reparado';
 
             card.innerHTML = `
-              <div class="bache-title">${rep.descripcion.split(' - ')[0] || 'Reporte de Bache'}</div>
+              <div class="bache-title">${rep.titulo}</div>
               <div class="bache-loc">📍 ${rep.ubicacion}</div>
-              <p class="bache-desc">${rep.descripcion.split(' - ')[1] || rep.descripcion}</p>
+              <p class="bache-desc">${rep.descripcion}</p>
               <div class="badge-row">
                 <span class="badge ${badgeClass}">${rep.severidad}</span>
-                <span class="badge badge-blue" style="background-color: rgba(0, 0, 0, 0.05); color: var(--text-main);">${rep.estado}</span>
+                <span class="badge ${stateClass}">${rep.estado}</span>
               </div>
-              <button class="btn-support" onclick="support('${rep._id}')">👍 Apoyar Reporte (${rep.votos || 0})</button>
+              <button class="btn-support" onclick="vote('${rep._id}')">👍 Apoyar Reporte (${rep.votos || 0})</button>
             `;
             grid.appendChild(card);
           });
         } else {
           grid.innerHTML = '<p style="color: var(--text-muted);">No hay reportes de baches registrados en este momento.</p>';
         }
-      } catch (err) {
-        document.getElementById('bachesGrid').innerHTML = '<p style="color: var(--accent-red);">Error al cargar los reportes de baches del servidor.</p>';
-      }
+      })
+      .catch(() => {
+        document.getElementById('bachesGrid').innerHTML = '<p style="color: var(--accent-red);">Error al cargar los reportes de baches.</p>';
+      });
     }
 
-    async function support(id) {
-      try {
-        const response = await fetch(`/api/reportes/${id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ votar: true })
-        });
-        const data = await response.json();
+    function vote(id) {
+      fetch(`/api/baches/${id}/votar`, {
+        method: 'POST'
+      })
+      .then(res => res.json())
+      .then(data => {
         if (data.success) {
           loadBaches();
         }
-      } catch (err) {
-        console.error(err);
-      }
+      })
+      .catch(err => console.error(err));
     }
 
     loadBaches();
